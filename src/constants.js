@@ -3,6 +3,7 @@ export const ACCOUNT_PATH = '/account'
 export const LOGIN_PATH = '/login'
 export const SIGNUP_PATH = '/signup'
 export const MIS_ZONAS_PATH = '/mis-zonas'
+export const WAITER_TABLES_PATH = '/waiter-tables'
 export const ACCOUNT_FORM_NAME = 'account'
 export const LOGIN_FORM_NAME = 'login'
 export const SIGNUP_FORM_NAME = 'signup'
@@ -19,6 +20,7 @@ export const paths = {
   account: ACCOUNT_PATH,
   login: LOGIN_PATH,
   signup: SIGNUP_PATH
+  // waiterTables: WAITER_TEBLES_PATH
 }
 
 export default { ...paths, ...formNames }
