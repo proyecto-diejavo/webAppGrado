@@ -3,11 +3,12 @@
 // Import and configure the Firebase SDK
 // These scripts are made available when the app is served or deployed on Firebase Hosting
 // If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup
+import { firebase } from '../config'
 importScripts('https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js')
 importScripts('https://www.gstatic.com/firebasejs/5.4.1/firebase-messaging.js')
 
 const PROD_MESSAGING_ID = ''
-const STAGE_MESSAGING_ID = '' // TODO: Set your staging messaging ID here
+const STAGE_MESSAGING_ID = firebase.messagingSenderId // TODO: Set your staging messaging ID here
 
 firebase.initializeApp({
   // Use prod id if stage id not defined or running on prod Firebase hosting

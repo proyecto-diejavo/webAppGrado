@@ -12,7 +12,8 @@ export const firebase = {
   authDomain: "proyecto-diejavo.firebaseapp.com",
   databaseURL: "https://proyecto-diejavo.firebaseio.com",
   projectId: "proyecto-diejavo",
-  storageBucket: "proyecto-diejavo.appspot.com"
+  storageBucket: "proyecto-diejavo.appspot.com",
+  messagingSenderId: "297449767079"
 }
 
 // Config to override default reduxFirebase config in store/createStore
