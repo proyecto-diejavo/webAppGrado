@@ -1,0 +1,17 @@
+@import 'base';
+
+.container {
+  @extend .flex-column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 200px;
+  margin: .5rem;
+  padding: 1.3rem;
+  width: 300px;
+}
+.top {
+  @extend .flex-row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
