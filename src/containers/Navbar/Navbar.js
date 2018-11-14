@@ -27,7 +27,7 @@ export const Navbar = ({
         className={classes.flex}
         component={Link}
         to={authExists ? LIST_PATH : '/'}>
-        grado
+        Home
       </Typography>
       {authExists ? (
         <AccountMenu
