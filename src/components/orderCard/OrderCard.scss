@@ -1,0 +1,30 @@
+@import 'base';
+
+.products {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.product{
+  border-bottom: 1px $lightGray solid;
+  padding: 2px 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.product > div {
+  padding:5px;
+}
+
+.productName {
+  width: 90%;
+}
+
+.productCount {
+  width: 10%;
+  text-align: right;
+}
+
+.orderCard {
+  background-color: #071317!important
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Tabs } from 'components'
 import TableOrders from '../tableOrders'
+import TableBills from '../tableBills'
 import classes from './TableMainPage.scss'
 
 export const TableMainPage = ({ tableMain }) => (
@@ -14,7 +15,7 @@ export const TableMainPage = ({ tableMain }) => (
         },
         {
           name: 'Cuentas',
-          content: '22'
+          content: <TableBills />
         }
       ]}
     />
