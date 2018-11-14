@@ -6,7 +6,6 @@ import { withNotifications } from 'modules/notification'
 import { withRouter, spinnerWhileLoading } from 'utils/components'
 import { UserIsAuthenticated } from 'utils/router'
 
-const newLocal = this;
 export default compose(
   UserIsAuthenticated,
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
@@ -40,7 +39,7 @@ export default compose(
   ),
   withHandlers({
     putComanda: props => (id, estado) => {
-      const { firestore, uid, showError, showSuccess, postMovimiento } = props
+      const { firestore, uid, showError, showSuccess } = props
       if (!uid) {
         return showError('Error cambiando el estado')
       }
@@ -52,7 +51,6 @@ export default compose(
           }
         )
         .then(() => {
-          postMovimiento()
           showSuccess('Comanda actualizada correctamente')
         })
         .catch(err => {
