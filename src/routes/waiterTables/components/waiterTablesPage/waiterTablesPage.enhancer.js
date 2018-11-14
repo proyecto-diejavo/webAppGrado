@@ -9,10 +9,16 @@ export default compose(
   firestoreConnect(({ params, uid }) => [
     {
       collection: 'zona_mesas',
-      where: ['usuario', '==', uid]
+      where: ['idMesero', '==', uid]
     }
   ]),
-  connect(({ firestore: { ordered } }) => ({
-    waiterTables: ordered.zona_mesas
-  }))
+  connect(({ firestore: { ordered } }) => {
+    if (!ordered.zona_mesas) return null
+    const zonaMesas = ordered.zona_mesas.sort(
+      (a, b) => a.numeroZona - b.numeroZona
+    )
+    return {
+      waiterTables: zonaMesas
+    }
+  })
 )

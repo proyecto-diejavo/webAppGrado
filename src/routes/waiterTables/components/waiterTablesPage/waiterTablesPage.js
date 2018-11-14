@@ -1,25 +1,34 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { isEmpty } from 'react-redux-firebase'
-import classes from './waiterTablesPage.scss'
+import { Card } from 'components'
+import classes from './WaiterTablesPage.scss'
 
-const zoneTables = zone => (
-  <div>
-    <p>{`Zona ${zone.zonaNumero}`}</p>
-    {!isEmpty(zone.mesas) && zone.mesas.map(mesa => <div>{mesa.numero}</div>)}
-  </div>
-)
+const zoneTables = zone => {
+  if (!zone.mesas) return null
+  const mesas = zone.mesas.sort((a, b) => a.numero - b.numero)
+  return (
+    <Fragment>
+      <h2 className={classes.zoneTitle}>{`Zona ${zone.numeroZona}`}</h2>
+      <div className={classes.tablesContainer}>
+        <div className={classes.tables}>
+          {mesas.map(mesa => (
+            <Card className={classes.tableCard}>{mesa.numero}</Card>
+          ))}
+        </div>
+      </div>
+    </Fragment>
+  )
+}
 
-export const waiterTablesPage = ({ waiterTables }) => (
+export const WaiterTablesPage = ({ waiterTables }) => (
   <div className={classes.container}>
-    <span>waiterTablesPage Component</span>
-    {/* <pre>{JSON.stringify(waiterTables, null, 2)}</pre> */}
     {!isEmpty(waiterTables) && waiterTables.map(zone => zoneTables(zone))}
   </div>
 )
 
-waiterTablesPage.propTypes = {
+WaiterTablesPage.propTypes = {
   waiterTables: PropTypes.object
 }
 
-export default waiterTablesPage
+export default WaiterTablesPage

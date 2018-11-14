@@ -1,20 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Paper from '@material-ui/core/Paper'
+import classNames from 'classnames/bind'
 import classes from './Card.scss'
 
-export const Card = ({ children }) => (
-  <Paper className={classes.container}>
-    <div className={classes.top}> {children}</div>
-  </Paper>
+const cx = classNames.bind(classes)
+
+export const Card = ({ children, className }) => (
+  <Paper className={cx('container', className)}>{children}</Paper>
 )
 
 Card.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+  className: PropTypes.string
 }
 
 Card.defaultProps = {
-  showDelete: true
+  showDelete: true,
+  className: ''
 }
 
 export default Card

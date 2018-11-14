@@ -1,7 +1,15 @@
+@import 'base';
+
 .container {
   padding: 0 10px;
   width: 100%;
 }
 .root {
-  background-color: #fff;
+  background-color: $background;
+  border: 0.5px $lightGreen solid;
+  border-top: none;
+  color: $white;
+}
+.tab {
+  background-color: #aabec5 !important;
 }
