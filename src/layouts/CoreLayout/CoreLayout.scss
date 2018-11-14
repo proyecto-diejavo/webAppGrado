@@ -10,5 +10,6 @@
 .children {
   height: calc(100% - 48px);
   overflow-y: scroll;
-  background-color: $background;
+  background: linear-gradient(#00141a, #012b36);
+  padding: 10px;
 }
