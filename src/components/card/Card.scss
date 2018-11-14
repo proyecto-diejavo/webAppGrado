@@ -2,16 +2,19 @@
 
 .container {
   @extend .flex-column;
+  font-size: 13px;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 200px;
+  height: auto;
   margin: .5rem;
   padding: 1.3rem;
-  width: 300px;
-}
-.top {
-  @extend .flex-row;
-  justify-content: space-between;
-  align-items: flex-start;
   width: 100%;
+  color: $white;
+  background-color: $darkGreen !important;
+  border: 0.5px $lightGreen solid;
+  &:hover {
+    background-color: $hoverGreen !important;
+    color: $darkGreen;
+    border: 0.5px $white solid;
+  }
 }

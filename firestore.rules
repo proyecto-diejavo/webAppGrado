@@ -28,5 +28,9 @@ service cloud.firestore {
         allow read, write: if isOwner(get(/databases/$(database)/documents/projects/$(projectId)));
       }
     }
+    
+    match /{document=**} {
+      allow read, write: if true;
+    }
   }
 }

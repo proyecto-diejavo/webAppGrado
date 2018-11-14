@@ -55,7 +55,7 @@ class FullWidthTabs extends React.Component {
               textColor="primary"
               fullWidth>
               {tabsArray.map(tab => (
-                <Tab label={tab.name} />
+                <Tab label={tab.name} className={classes.tab} />
               ))}
             </Tabs>
           </AppBar>

@@ -1,0 +1,33 @@
+@import 'base';
+
+.container {
+  @extend .flex-column;
+}
+.tablesContainer {
+  @extend .flex-column;
+  width: 100%;
+  border: 1px $gradientGreen solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+.tables {
+  @extend .flex-row-center;
+  -webkit-flex-flow: row wrap;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tableCard {
+  height: 80px;
+  width: 80px;
+  font-size: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 23px !important;
+}
+.zoneTitle {
+  color: $gradientWhite;
+  margin: 0px 0px 7px 10px;
+}
