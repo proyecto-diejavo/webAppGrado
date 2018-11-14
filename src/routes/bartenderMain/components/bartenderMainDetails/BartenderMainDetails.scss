@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 .product{
-  border-bottom: 1px red solid;
+  border-bottom: 1px $lightGreen solid;
   padding: 2px 0px;
   display: flex;
   flex-direction: row;
@@ -29,4 +29,13 @@
 .productCount{
   width: 10%;
   text-align: right;
+}
+
+.iconUpdateContent{
+  width: 100%;
+  text-align: right;
+}
+
+.IconUpdate{
+  color: white;
 }

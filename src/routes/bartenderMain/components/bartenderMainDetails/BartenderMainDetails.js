@@ -4,7 +4,16 @@ import { isEmpty } from 'react-redux-firebase'
 import { Card } from 'components'
 import IconButton from '@material-ui/core/IconButton'
 import UpdateIcon from '@material-ui/icons/Update'
+import CheckIcon from '@material-ui/icons/check'
+import CloseIcon from '@material-ui/icons/close'
 import classes from './BartenderMainDetails.scss'
+
+const renderIcon = state => {
+  if (state === 'Generado') return <UpdateIcon className={classes.IconUpdate} />
+  if (state === 'Despachado')
+    return <CheckIcon className={classes.IconUpdate} />
+  if (state === 'Cancelado') return <CloseIcon className={classes.IconUpdate} />
+}
 
 export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
   children ? (
@@ -27,9 +36,9 @@ export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
                   </div>
                 ))}
             </div>
-            <div>
+            <div className={classes.iconUpdateContent}>
               <IconButton onClick={() => putComanda(order.id, 'Despachado')}>
-                <UpdateIcon />
+                {renderIcon(order.estado)}
               </IconButton>
             </div>
           </Card>

@@ -2,6 +2,7 @@ import React, { cloneElement } from 'react'
 import PropTypes from 'prop-types'
 import { Tabs } from 'components'
 import BartenderMainCard from '../bartenderMainDetails'
+import BartenderProductsList from '../bartenderProductsList'
 import classes from './bartenderMainPage.scss'
 
 export const bartenderMainPage = ({ children, auth }) =>
@@ -17,7 +18,7 @@ export const bartenderMainPage = ({ children, auth }) =>
           },
           {
             name: 'Inventario',
-            content: '22'
+            content: <BartenderProductsList />
           },
           {
             name: 'Movimientos',
