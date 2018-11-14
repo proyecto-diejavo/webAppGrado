@@ -50,7 +50,7 @@ export default compose(
             estado: estado
           }
         )
-        .then(() => {2
+        .then(() => {
           showSuccess('Comanda actualizada correctamente')
         })
         .catch(err => {

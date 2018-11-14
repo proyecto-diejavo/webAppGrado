@@ -1,30 +1,36 @@
 import React, { cloneElement } from 'react'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'react-redux-firebase'
-import BartenderMainTitle from '../BartenderMainTitle'
+import { Tabs } from 'components'
+import BartenderMainCard from '../bartenderMainDetails'
 import classes from './bartenderMainPage.scss'
 
-export const bartenderMainPage = ({ children, orders, auth }) =>
+export const bartenderMainPage = ({ children, auth }) =>
   children ? (
     cloneElement(children, { auth })
   ) : (
     <div className={classes.container}>
-      <div className={classes.tiles}>
-        {!isEmpty(orders) &&
-          orders.map((order, ind) => (
-            <BartenderMainTitle
-              key={`Comanda-${order.id}-${ind}`}
-              name={order.numeroMesa}
-            />
-          ))}
-      </div>
+      <Tabs
+        tabsArray={[
+          {
+            name: 'Comandas',
+            content: <BartenderMainCard />
+          },
+          {
+            name: 'Inventario',
+            content: '22'
+          },
+          {
+            name: 'Movimientos',
+            content: ''
+          }
+        ]}
+      />
     </div>
   )
 
 bartenderMainPage.propTypes = {
   children: PropTypes.object, // from react-router
-  auth: PropTypes.object, // from enhancer (connect + firebaseConnect - firebase)
-  orders: PropTypes.object // from enhancer (firestoreConnect + connect)
+  auth: PropTypes.object // from enhancer (connect + firebaseConnect - firebase)
 }
 
 export default bartenderMainPage

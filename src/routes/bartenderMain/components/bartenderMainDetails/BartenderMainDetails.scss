@@ -1,0 +1,32 @@
+@import 'base';
+
+.tiles {
+    @extend .flex-row-center;
+    -webkit-flex-flow: row wrap;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+.products {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.product{
+  border-bottom: 1px red solid;
+  padding: 2px 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.product > div {
+  padding:5px;
+}
+
+.productName{
+  width: 90%;
+}
+
+.productCount{
+  width: 10%;
+  text-align: right;
+}

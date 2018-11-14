@@ -13,7 +13,7 @@ export default compose(
 
   firestoreConnect(({ params, uid }) => [
     {
-      collection: 'barraComandas',
+      collection: 'mesa',
       where: [
         ['idUsuario', '==', uid],
         ['idBarra', '==', 'aKrNooCLqfezpo2CfeU7']
@@ -23,7 +23,6 @@ export default compose(
   connect(({ firestore: { ordered } }) => ({
     orders: ordered.barraComandas
   })),
-  // spinnerWhileLoading(['barraComandas']),
   withRouter,
   withNotifications,
   withStateHandlers(
