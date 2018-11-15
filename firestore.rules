@@ -28,6 +28,16 @@ service cloud.firestore {
         allow read, write: if isOwner(get(/databases/$(database)/documents/projects/$(projectId)));
       }
     }
+
+     // Tables
+    match /mesa/{tableId} {
+      // Only tables you own can be viewed
+      allow read, write: if isOwner(request.resource);
+      // Rules apply to all child collections
+      match /{allChildren=**} {
+        allow read, write: if isOwner(get(/databases/$(database)/documents/mesa/$(tableId)));
+      }
+    }
     
     match /{document=**} {
       allow read, write: if true;
