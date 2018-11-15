@@ -15,5 +15,18 @@
 <body>
   <div id="root" style="height: 100%"></div>
   <noscript>Javascript must be enabled for Grado to work. Please use a compatiable browser.</noscript>
+  <!-- <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then(function(registration){
+          console.log('Service worker register', registration.scope);   
+        })
+        .catch(function(err){
+          console.log('Failed registration service ', err);
+        });
+      });
+    }
+  </script> -->
 </body>
 </html>
