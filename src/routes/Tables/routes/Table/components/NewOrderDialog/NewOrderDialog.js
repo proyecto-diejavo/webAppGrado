@@ -43,7 +43,6 @@ export const NewOrderDialog = ({
 NewOrderDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired
 }

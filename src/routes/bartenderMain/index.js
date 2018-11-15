@@ -11,7 +11,8 @@ export default store => ({
       require => {
         /*  Webpack - use require callback to define
           dependencies for bundling   */
-        const bartenderMainPage = require('./components/bartenderMainPage').default
+        const bartenderMainPage = require('./components/bartenderMainPage')
+          .default
 
         /*  Return getComponent   */
         cb(null, bartenderMainPage)
