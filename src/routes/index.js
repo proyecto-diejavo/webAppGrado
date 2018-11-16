@@ -6,6 +6,8 @@ import ProjectsRoute from './Projects'
 import AccountRoute from './Account'
 import NotFoundRoute from './NotFound'
 import BartenderMainRoute from './bartenderMain'
+import adminMainRoute from './adminMain'
+import usersRoute from './users'
 import WaiterTablesRoute from './waiterTables'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -21,6 +23,8 @@ export const createRoutes = store => ({
     SignupRoute(store),
     ProjectsRoute(store),
     BartenderMainRoute(store),
+    adminMainRoute(store),
+    usersRoute(store),
     WaiterTablesRoute(store),
     // AsyncRoute(store) // async routes setup by passing store
     // SyncRoute, // sync routes just need route object by itself

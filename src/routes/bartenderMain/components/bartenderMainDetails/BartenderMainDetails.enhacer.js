@@ -11,13 +11,10 @@ export default compose(
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
   spinnerWhileLoading(['uid']),
 
-  firestoreConnect(({ params, uid }) => [
+  firestoreConnect(({ params, uid, idBarra }) => [
     {
       collection: 'comanda',
-      where: [
-        ['idBartender', '==', uid],
-        ['idBarra', '==', 'aKrNooCLqfezpo2CfeU7']
-      ]
+      where: [['idBartender', '==', uid], ['idBarra', '==', idBarra]]
     }
   ]),
   connect(({ firestore: { ordered } }) => ({
