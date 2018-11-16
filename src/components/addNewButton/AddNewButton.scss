@@ -1,0 +1,12 @@
+@import 'base';
+
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.button {
+  width: 4rem !important;
+  height: 4rem !important;
+  color: $softGreen !important;
+}

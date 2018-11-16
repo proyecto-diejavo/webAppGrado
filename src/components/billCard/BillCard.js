@@ -8,8 +8,8 @@ export const BillCard = ({ bill }) => (
   <Card className={classes.billCard}>
     <div className={classes.products}>
       {!isEmpty(bill.productos) &&
-        bill.productos.map((product, ind) => (
-          <div className={classes.product}>
+        bill.productos.map((product, index) => (
+          <div key={`billCard-${index}`} className={classes.product}>
             <div className={classes.productName}> {product.nombreProducto}</div>
             <div className={classes.productCount}>{product.cantidad}</div>
           </div>

@@ -1,4 +1,4 @@
-import { TABLES_PATH as path } from 'constants'
+import { WAITER_TABLES_PATH as path } from 'constants'
 
 export default store => ({
   path,
@@ -6,7 +6,7 @@ export default store => ({
     require.ensure(
       [],
       require => {
-        const Tables = require('./components/TablesPage').default
+        const Tables = require('./components/waiterTablesPage').default
         cb(null, Tables)
       },
       'Tables'

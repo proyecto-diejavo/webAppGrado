@@ -1,13 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { OrderCard } from 'components'
+import { OrderCard, AddNewButton } from 'components'
 import { isEmpty } from 'react-redux-firebase'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
 import NewOrderDialog from '../NewOrderDialog'
 import classes from './TableOrders.scss'
-
-const iconSize = '6rem'
-const iconStyle = { width: iconSize, height: iconSize }
 
 export const TableOrders = ({
   orders,
@@ -17,9 +13,12 @@ export const TableOrders = ({
   toggleDialog
 }) => (
   <div className={classes.container}>
-    {!isEmpty(orders) && orders.map(order => <OrderCard order={order} />)}
+    {!isEmpty(orders) &&
+      orders.map((order, index) => (
+        <OrderCard key={`orderCard-${index}`} order={order} />
+      ))}
     <div>
-      <ContentAddCircle style={iconStyle} onClick={toggleDialog} />
+      <AddNewButton onClick={toggleDialog} />
     </div>
     <NewOrderDialog
       onSubmit={addOrder}
