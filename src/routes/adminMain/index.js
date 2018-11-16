@@ -1,4 +1,4 @@
-import { BARTENDER_MAIN_PATH as path } from 'constants'
+import { ADMIN_MAIN_PATH as path } from 'constants'
 
 export default store => ({
   path,
@@ -11,15 +11,14 @@ export default store => ({
       require => {
         /*  Webpack - use require callback to define
           dependencies for bundling   */
-        const bartenderMainPage = require('./components/bartenderMainPage')
-          .default
+        const adminMainPage = require('./components/adminMainPage').default
 
         /*  Return getComponent   */
-        cb(null, bartenderMainPage)
+        cb(null, adminMainPage)
 
         /* Webpack named bundle   */
       },
-      'bartenderMainPage'
+      'adminMainPage'
     )
   }
 })
