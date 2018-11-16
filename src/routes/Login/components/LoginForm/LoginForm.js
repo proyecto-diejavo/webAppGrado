@@ -11,13 +11,13 @@ export const LoginForm = ({ pristine, submitting, handleSubmit }) => (
     <Field
       name="email"
       component={TextField}
-      label="Email"
+      label="Correo"
       validate={[required, validateEmail]}
     />
     <Field
       name="password"
       component={TextField}
-      label="Password"
+      label="Contraseña"
       type="password"
       validate={required}
     />
@@ -27,7 +27,7 @@ export const LoginForm = ({ pristine, submitting, handleSubmit }) => (
         type="submit"
         variant="contained"
         disabled={pristine || submitting}>
-        {submitting ? 'Loading' : 'Login'}
+        {submitting ? 'Iniciando' : 'Iniciar Sesión'}
       </Button>
     </div>
   </form>

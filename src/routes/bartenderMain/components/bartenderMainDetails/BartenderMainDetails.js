@@ -9,10 +9,10 @@ import CloseIcon from '@material-ui/icons/close'
 import classes from './BartenderMainDetails.scss'
 
 const renderIcon = state => {
-  if (state === 'Generado') return <UpdateIcon className={classes.IconUpdate} />
-  if (state === 'Despachado')
+  if (state === 'Generada') return <UpdateIcon className={classes.IconUpdate} />
+  if (state === 'Despachada')
     return <CheckIcon className={classes.IconUpdate} />
-  if (state === 'Cancelado') return <CloseIcon className={classes.IconUpdate} />
+  if (state === 'Cancelada') return <CloseIcon className={classes.IconUpdate} />
 }
 
 export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
@@ -37,7 +37,7 @@ export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
                 ))}
             </div>
             <div className={classes.iconUpdateContent}>
-              <IconButton onClick={() => putComanda(order.id, 'Despachado')}>
+              <IconButton onClick={() => putComanda(order.id, 'Despachada')}>
                 {renderIcon(order.estado)}
               </IconButton>
             </div>

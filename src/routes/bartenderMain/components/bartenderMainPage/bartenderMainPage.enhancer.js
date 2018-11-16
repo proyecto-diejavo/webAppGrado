@@ -13,16 +13,16 @@ export default compose(
 
   firestoreConnect(({ params, uid }) => [
     {
-      collection: 'mesa',
-      where: [
-        ['idUsuario', '==', uid],
-        ['idBarra', '==', 'aKrNooCLqfezpo2CfeU7']
-      ]
+      collection: 'usuariosBarras',
+      where: ['idUsuario', '==', uid]
     }
   ]),
-  connect(({ firestore: { ordered } }) => ({
-    orders: ordered.barraComandas
-  })),
+  connect(({ firestore: { ordered } }) => {
+    if (!ordered.usuariosBarras) return null
+    return {
+      userBarra: ordered.usuariosBarras[0]
+    }
+  }),
   withRouter,
   withNotifications,
   withStateHandlers(

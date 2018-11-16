@@ -11,13 +11,14 @@ export default compose(
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
   spinnerWhileLoading(['uid']),
 
-  firestoreConnect(({ params, uid }) => [
+  firestoreConnect(({ params, uid, idBarra }) => [
     {
-      collection: 'productos'
+      collection: 'inventarioBarra',
+      where: ['idBarra', '==', idBarra]
     }
   ]),
   connect(({ firestore: { ordered } }) => ({
-    product: ordered.productos
+    inventarioBarra: ordered.inventarioBarra
   })),
   withRouter,
   withNotifications,
