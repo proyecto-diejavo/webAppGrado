@@ -1,12 +1,23 @@
 @import 'base';
 
+.container {
+  margin-bottom: 10px; 
+}
+
+.title {
+  color: white;
+  font-size: 15px;
+}
+
 .products {
   display: flex;
   width: 100%;
   flex-direction: column;
+  .product:not(:nth-last-child(1)) {
+    border-bottom: 1px $lightGray solid;
+  }
 }
 .product{
-  border-bottom: 1px $lightGray solid;
   padding: 2px 0px;
   display: flex;
   flex-direction: row;

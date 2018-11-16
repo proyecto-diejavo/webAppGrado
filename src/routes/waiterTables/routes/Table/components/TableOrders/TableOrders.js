@@ -14,9 +14,17 @@ export const TableOrders = ({
 }) => (
   <div className={classes.container}>
     {!isEmpty(orders) &&
-      orders.map((order, index) => (
-        <OrderCard key={`orderCard-${index}`} order={order} />
-      ))}
+      orders.map((order, index) => {
+        const title = order.numeroBarra ? 'Barra' : 'Cocina'
+        const titleNumber = order.numeroBarra ? order.numeroBarra : ''
+        return (
+          <OrderCard
+            key={`orderCard-${index}`}
+            order={order}
+            title={`${title} ${titleNumber}`}
+          />
+        )
+      })}
     <div>
       <AddNewButton onClick={toggleDialog} />
     </div>

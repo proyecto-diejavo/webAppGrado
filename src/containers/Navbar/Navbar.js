@@ -29,6 +29,14 @@ export const Navbar = ({
         to={authExists ? LIST_PATH : '/'}>
         Home
       </Typography>
+      <Typography
+        variant="title"
+        color="inherit"
+        className={classes.flex}
+        component={Link}
+        to={authExists ? LIST_PATH : '/'}>
+        Mesa 3  -  $450.000
+      </Typography>
       {authExists ? (
         <AccountMenu
           avatarUrl={avatarUrl}
