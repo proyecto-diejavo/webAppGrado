@@ -3,12 +3,17 @@
 .container {
   margin-bottom: 10px; 
 }
-
-.title {
-  color: white;
-  font-size: 15px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  .title {
+    color: white;
+    font-size: 15px;
+  }
+  .icon{
+    color: white;
+  }
 }
-
 .products {
   display: flex;
   width: 100%;
