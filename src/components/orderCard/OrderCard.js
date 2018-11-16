@@ -8,8 +8,8 @@ export const OrderCard = ({ order }) => (
   <Card className={classes.orderCard}>
     <div className={classes.products}>
       {!isEmpty(order.productos) &&
-        order.productos.map((product, ind) => (
-          <div className={classes.product}>
+        order.productos.map((product, index) => (
+          <div key={`orderCard-${index}`} className={classes.product}>
             <div className={classes.productName}> {product.nombreProducto}</div>
             <div className={classes.productCount}>{product.cantidad}</div>
           </div>

@@ -1,5 +1,6 @@
 @import 'base';
 
+
 .container {
-  @extend .flex-column-center;
+  @extend .flex-column;
 }

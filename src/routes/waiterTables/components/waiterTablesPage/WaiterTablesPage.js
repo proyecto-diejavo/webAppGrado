@@ -2,7 +2,7 @@ import React, { Fragment, cloneElement } from 'react'
 import PropTypes from 'prop-types'
 import { isEmpty } from 'react-redux-firebase'
 import { Card } from 'components'
-import classes from './TablesPage.scss'
+import classes from './WaiterTablesPage.scss'
 
 const zoneTables = (zone, goToTable) => {
   if (!zone.mesas) return null
@@ -25,7 +25,7 @@ const zoneTables = (zone, goToTable) => {
   )
 }
 
-export const TablesPage = ({ zones, goToTable, children, auth }) =>
+export const WaiterTablesPage = ({ zones, goToTable, children, auth }) =>
   children ? (
     cloneElement(children, { auth })
   ) : (
@@ -34,11 +34,11 @@ export const TablesPage = ({ zones, goToTable, children, auth }) =>
     </div>
   )
 
-TablesPage.propTypes = {
+WaiterTablesPage.propTypes = {
   children: PropTypes.object,
   auth: PropTypes.object,
   zones: PropTypes.object,
   goToTable: PropTypes.func.isRequired
 }
 
-export default TablesPage
+export default WaiterTablesPage

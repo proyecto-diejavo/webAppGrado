@@ -1,6 +1,6 @@
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { TABLES_PATH } from 'constants'
+import { WAITER_TABLES_PATH } from 'constants'
 import { firestoreConnect } from 'react-redux-firebase'
 import { withNotifications } from 'modules/notification'
 import { withHandlers, pure } from 'recompose'
@@ -30,7 +30,7 @@ export default compose(
   withNotifications,
   withHandlers({
     goToTable: ({ router }) => tableId => {
-      router.push(`${TABLES_PATH}/${tableId}`)
+      router.push(`${WAITER_TABLES_PATH}/${tableId}`)
     }
   }),
   pure
