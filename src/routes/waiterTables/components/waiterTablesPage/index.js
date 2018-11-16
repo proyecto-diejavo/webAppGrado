@@ -1,4 +1,4 @@
-import waiterTablesPage from './waiterTablesPage'
-import enhance from './waiterTablesPage.enhancer'
+import WaiterTablesPage from './WaiterTablesPage'
+import enhance from './WaiterTablesPage.enhancer'
 
-export default enhance(waiterTablesPage)
+export default enhance(WaiterTablesPage)

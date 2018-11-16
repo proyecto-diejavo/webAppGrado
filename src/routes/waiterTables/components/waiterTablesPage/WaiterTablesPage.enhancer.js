@@ -1,6 +1,10 @@
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { WAITER_TABLES_PATH } from 'constants'
 import { firestoreConnect } from 'react-redux-firebase'
+import { withNotifications } from 'modules/notification'
+import { withHandlers, pure } from 'recompose'
+import { withRouter, spinnerWhileLoading } from 'utils/components'
 import { UserIsAuthenticated } from 'utils/router'
 
 export default compose(
@@ -18,7 +22,16 @@ export default compose(
       (a, b) => a.numeroZona - b.numeroZona
     )
     return {
-      waiterTables: zonaMesas
+      zones: zonaMesas
     }
-  })
+  }),
+  spinnerWhileLoading(['zones']),
+  withRouter,
+  withNotifications,
+  withHandlers({
+    goToTable: ({ router }) => tableId => {
+      router.push(`${WAITER_TABLES_PATH}/${tableId}`)
+    }
+  }),
+  pure
 )

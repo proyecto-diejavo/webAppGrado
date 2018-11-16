@@ -21,7 +21,6 @@ function initStackdriverErrorReporter() {
   return errorHandler
 }
 
-
 /**
  * Initialize client side error reporting. Error handling is only
  * initialized if in production environment.
