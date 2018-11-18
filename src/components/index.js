@@ -1,6 +1,7 @@
 export AddNewButton from './addNewButton'
 export Tabs from './tabs'
 export Card from './card'
+export Confirm from './confirm'
 export AutoComplete from './autocomplete'
 export BillCard from './billCard'
 export OrderCard from './orderCard'
