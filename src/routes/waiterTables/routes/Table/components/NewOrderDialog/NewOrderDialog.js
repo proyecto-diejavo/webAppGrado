@@ -6,16 +6,22 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import { Field } from 'redux-form'
-import { TextField, SelectField, MenuItem } from 'redux-form-material-ui'
+import { TextField } from 'redux-form-material-ui'
 import { required } from 'utils/form'
-
+import { SelectField } from 'components'
+import MenuItem from '@material-ui/core/MenuItem'
 import classes from './NewOrderDialog.scss'
 
 class NewOrderDialog extends Component {
   state = {
-    value: null
+    age: '',
+    name: 'hai',
+    labelWidth: 0
   }
-  handleChange = (event, index, value) => this.setState({ value })
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   render() {
     const { open, onClose, submit, handleSubmit } = this.props
@@ -30,15 +36,19 @@ class NewOrderDialog extends Component {
               label="Barra"
               validate={[required]}
             />
-            {/* <Field
-              name="driver"
+            <Field
+              name="j"
               component={SelectField}
-              hintText="Driver"
-              floatingLabelText="Driver">
-              <MenuItem value="alice@redux-pizza.com" primaryText="Alice" />
-              <MenuItem value="bob@redux-pizza.com" primaryText="Bob" />
-              <MenuItem value="carl@redux-pizza.com" primaryText="Carl" />
-            </Field> */}
+              label="j"
+              value={this.state.age}
+              onChange={this.handleChange}>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Field>
           </DialogContent>
           <DialogActions>
             <Button onClick={onClose} color="secondary">
