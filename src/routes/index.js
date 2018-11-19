@@ -9,6 +9,7 @@ import BartenderMainRoute from './bartenderMain'
 import adminMainRoute from './adminMain'
 import usersRoute from './users'
 import WaiterTablesRoute from './waiterTables'
+import cashierRoute from './cashier'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -27,6 +28,7 @@ export const createRoutes = store => ({
     usersRoute(store),
     WaiterTablesRoute(store),
     usersRoute(store),
+    cashierRoute(store),
     // AsyncRoute(store) // async routes setup by passing store
     // SyncRoute, // sync routes just need route object by itself
     /* Place all Routes above here so NotFoundRoute can act as a 404 page */

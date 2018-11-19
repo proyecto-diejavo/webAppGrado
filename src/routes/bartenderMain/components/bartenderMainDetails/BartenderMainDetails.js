@@ -16,6 +16,7 @@ export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
             order={order}
             title={`Mesa ${order.numeroMesa}`}
             onClick={() => putComanda(order.id, resolveState)}
+            textModal={'¿Desea despachar la comanda?'}
           />
         ))}
     </div>

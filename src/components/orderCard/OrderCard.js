@@ -4,8 +4,9 @@ import { Card, Confirm } from 'components'
 import { isEmpty } from 'react-redux-firebase'
 import classes from './OrderCard.scss'
 import UpdateIcon from '@material-ui/icons/Update'
-import CheckIcon from '@material-ui/icons/check'
+import CheckIcon from '@material-ui/icons/send'
 import CloseIcon from '@material-ui/icons/close'
+import WaitIcon from '@material-ui/icons/schedule'
 
 class OrderCard extends Component {
   state = {
@@ -23,6 +24,8 @@ class OrderCard extends Component {
         return <CheckIcon className={classes.icon} />
       case 'Cancelada':
         return <CloseIcon className={classes.icon} />
+      case 'Por Cancelar':
+        return <WaitIcon className={classes.icon} />
     }
   }
   onConfirm = () => {
@@ -30,16 +33,16 @@ class OrderCard extends Component {
     onClick()
     this.handleChange()
   }
-  renderConfirm = () => (
+  renderConfirm = textModal => (
     <Confirm
       open={this.state.showConfirm}
-      message={'¿Desea despachar la comanda?'}
+      message={textModal}
       onCancel={this.handleChange}
       onConfirm={this.onConfirm}
     />
   )
   render() {
-    const { order, title } = this.props
+    const { order, title, textModal } = this.props
     return (
       <div className={classes.container}>
         <div className={classes.header}>
@@ -59,7 +62,7 @@ class OrderCard extends Component {
               ))}
           </div>
         </Card>
-        {this.renderConfirm()}
+        {this.renderConfirm(textModal)}
       </div>
     )
   }
@@ -68,7 +71,8 @@ class OrderCard extends Component {
 OrderCard.propTypes = {
   order: PropTypes.object.isRequired,
   title: PropTypes.object.isRequired,
-  onClick: PropTypes.object
+  onClick: PropTypes.object,
+  textModal: PropTypes.string
 }
 
 export default OrderCard
