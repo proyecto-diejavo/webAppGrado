@@ -10,10 +10,10 @@
   flex-direction: column;
 }
 .addBarrasDetails{
-  border-bottom: 1px $lightGreen solid;
   padding: 2px 0px;
   display: flex;
   flex-direction: row;
+  margin-bottom: 15px;
 }
 
 .inputs {
@@ -45,4 +45,22 @@
 
 .CenterText{
   text-align: center !important;
+}
+
+.divInput{
+  width:85%; 
+}
+
+.divIcon{
+  width:15%;
+  text-align: center;
+  line-height: 30px;
+}
+
+.inputDescription{
+  color: white !important;
+}
+
+.MuiFormLabel-root-125{
+  color: white !important;
 }

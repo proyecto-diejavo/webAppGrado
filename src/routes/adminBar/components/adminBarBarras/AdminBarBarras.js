@@ -11,15 +11,16 @@ export const AdminBarBarras = ({ barras, handleSubmit }) => (
   <div className={classes.container}>
     <div className={classes.addBarras}>
       <div className={classes.addBarrasDetails}>
-        <div>
+        <div className={classes.divInput}>
           <Field
             fullWidth
             name="displayName"
             component={TextField}
             label="Display Name"
+            className={classes.inputDescription}
           />
         </div>
-        <div>
+        <div className={classes.divIcon}>
           <ContentAddCircle />
         </div>
       </div>
