@@ -45,7 +45,7 @@ class Bill extends Component {
             <div className={classes.product}>
               {'Servicio'}
               <div className={classes.productCount}>
-                {bill.estado === 'Abierta' ? (
+                {bill.estado === 'abierta' ? (
                   <TextField
                     name="service"
                     inputProps={{
@@ -74,7 +74,7 @@ class Bill extends Component {
           <Button onClick={onClose} color="secondary">
             Cancelar
           </Button>
-          {bill.estado === 'Abierta' && (
+          {bill.estado === 'abierta' && (
             <Button onClick={onSubmit} color="primary">
               Cerrar Cuenta
             </Button>

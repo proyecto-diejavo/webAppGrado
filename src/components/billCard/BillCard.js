@@ -11,8 +11,8 @@ import classes from './BillCard.scss'
 const cx = classNames.bind(classes)
 
 const renderIcon = state => {
-  if (state === 'Por cerrar') return <UpdateIcon className={classes.icon} />
-  if (state === 'Cerrada') return <CheckIcon className={classes.closeIcon} />
+  if (state === 'por cerrar') return <UpdateIcon className={classes.icon} />
+  if (state === 'cerrada') return <CheckIcon className={classes.closeIcon} />
 }
 class BillCard extends Component {
   state = {
@@ -28,7 +28,7 @@ class BillCard extends Component {
   }
   render() {
     const { bill, onChangeService } = this.props
-    const closed = bill.estado === 'Cerrada'
+    const closed = bill.estado === 'cerrada'
     return (
       !isEmpty(bill.productos) && (
         <Fragment>

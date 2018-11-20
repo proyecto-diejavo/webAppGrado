@@ -21,11 +21,11 @@ class OrderCard extends Component {
   }
   renderIcon = state => {
     switch (state) {
-      case 'Generada':
+      case 'generada':
         return <CheckIcon className={classes.icon} />
-      case 'Cancelada':
+      case 'cancelada':
         return <CloseIcon className={classes.icon} />
-      case 'Por Cancelar':
+      case 'por cancelar':
         return <UpdateIcon className={classes.icon} />
     }
   }
@@ -44,7 +44,7 @@ class OrderCard extends Component {
   )
   render() {
     const { order, title, textModal } = this.props
-    const closed = order.estado === 'Despachada'
+    const closed = order.estado === 'despachada'
     return (
       <div className={classes.container}>
         <div className={classes.header}>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { isEmpty } from 'react-redux-firebase'
 import { OrderCard } from 'components'
 
-const resolveState = 'Despachada'
+const resolveState = 'despachada'
 export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
   children ? (
     cloneElement(children, { auth })
