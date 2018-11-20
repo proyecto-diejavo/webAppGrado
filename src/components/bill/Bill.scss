@@ -1,1 +1,42 @@
 @import 'base';
+
+.service {
+  text-align: right;
+}
+
+.dialog {
+  margin: 20px!important;
+  height: 90%;
+}
+
+.content {
+  padding: 0 15px!important;
+}
+
+.products {
+  padding: 4px;
+  border: 0.5px $lightGray solid;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  .product:not(:nth-last-child(1)) {
+    border-bottom: 1px $gray solid;
+  }
+}
+
+.product{
+  padding: 2px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 30px;
+  align-items: center;
+}
+
+.productCount {
+  text-align: right;
+}
+
+.totals {
+  padding: 4px;
+}

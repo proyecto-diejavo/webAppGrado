@@ -24,7 +24,7 @@ class NewOrderDialog extends Component {
   }
 
   render() {
-    const { open, onClose, submit, handleSubmit } = this.props
+    const { open, onClose, handleSubmit } = this.props
     return (
       <Dialog open={open} onClose={onClose}>
         <DialogTitle id="simple-dialog-title">Crear Comanda</DialogTitle>

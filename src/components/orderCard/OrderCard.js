@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Confirm } from 'components'
 import { isEmpty } from 'react-redux-firebase'
-import classes from './OrderCard.scss'
+import classNames from 'classnames/bind'
 import UpdateIcon from '@material-ui/icons/Update'
 import CheckIcon from '@material-ui/icons/send'
 import CloseIcon from '@material-ui/icons/close'
 import WaitIcon from '@material-ui/icons/schedule'
+import classes from './OrderCard.scss'
+
+const cx = classNames.bind(classes)
 
 class OrderCard extends Component {
   state = {
@@ -19,13 +22,11 @@ class OrderCard extends Component {
   renderIcon = state => {
     switch (state) {
       case 'Generada':
-        return <UpdateIcon className={classes.icon} />
-      case 'Despachada':
         return <CheckIcon className={classes.icon} />
       case 'Cancelada':
         return <CloseIcon className={classes.icon} />
       case 'Por Cancelar':
-        return <WaitIcon className={classes.icon} />
+        return <UpdateIcon className={classes.icon} />
     }
   }
   onConfirm = () => {
@@ -43,13 +44,14 @@ class OrderCard extends Component {
   )
   render() {
     const { order, title, textModal } = this.props
+    const closed = order.estado === 'Despachada'
     return (
       <div className={classes.container}>
         <div className={classes.header}>
-          <div className={classes.title}> {title}</div>
+          <div className={cx('title', { closed })}> {title}</div>
           <div onClick={this.handleChange}>{this.renderIcon(order.estado)}</div>
         </div>
-        <Card className={classes.orderCard}>
+        <Card className={cx('orderCard', { closed })}>
           <div className={classes.products}>
             {!isEmpty(order.productos) &&
               order.productos.map((product, index) => (

@@ -6,9 +6,14 @@
 .header {
   display: flex;
   justify-content: space-between;
+  height: 30px;
+  align-items: center;
   .title {
     color: white;
     font-size: 15px;
+    &.closed {
+      color: $darkGray;
+    }
   }
   .icon{
     color: white;
@@ -42,5 +47,9 @@
 }
 
 .orderCard {
-  background-color: #071317!important
+  background-color: $darkestGreen!important;
+  &.closed {
+    border: .5px $darkGray solid;
+    color: $darkGray;
+  }
 }
