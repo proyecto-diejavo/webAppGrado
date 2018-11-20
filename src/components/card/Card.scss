@@ -6,12 +6,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: auto;
-  margin: .5rem;
   padding: 1.3rem;
-  width: 100%;
   color: $white;
-  background-color: $darkGreen !important;
   border: 0.5px $lightGreen solid;
+  border-radius: 12px !important;
   &:hover {
     background-color: $hoverGreen !important;
     color: $darkGreen;

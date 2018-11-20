@@ -31,7 +31,7 @@ export const TableOrders = ({
     <NewOrderDialog
       onSubmit={addOrder}
       open={newDialogOpen}
-      onRequestClose={toggleDialog}
+      onClose={toggleDialog}
     />
   </div>
 )

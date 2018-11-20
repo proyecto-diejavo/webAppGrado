@@ -1,7 +1,14 @@
 @import 'base';
 
-.container {
-  margin-bottom: 10px; 
+.billCard {
+  background-color: #071317!important;
+  margin-bottom: 20px;
+  padding: 0px 15px;
+  height: 70px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-direction: row !important;
 }
 
 .header {
@@ -11,34 +18,8 @@
     color: white;
   }
 }
-
-.products {
+.total{
+  margin-left: 10px;
+  font-size: 23px;
   display: flex;
-  width: 100%;
-  flex-direction: column;
-  .product:not(:nth-last-child(1)) {
-    border-bottom: 1px $lightGray solid;
-  }
-}
-.product{
-  padding: 2px 0px;
-  display: flex;
-  flex-direction: row;
-}
-
-.product > div {
-  padding:5px;
-}
-
-.productName {
-  width: 90%;
-}
-
-.productCount {
-  width: 10%;
-  text-align: right;
-}
-
-.billCard {
-  background-color: #071317!important
 }
