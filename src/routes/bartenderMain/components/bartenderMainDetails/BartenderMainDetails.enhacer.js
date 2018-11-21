@@ -35,6 +35,32 @@ export default compose(
     }
   ),
   withHandlers({
+    registerMovement: props => (idBarra, newInventory ) => {
+      const { firestore, uid, showError, showSuccess } = props
+      if (!uid) {
+        return showError('Error cambiando el estado')
+      }
+      return firestore
+        .add(
+          { collection: 'movimientoInventario' },
+          {
+            idOrigen: idBarra,
+            origen: "Barra",
+            tipo: "Salida",
+            productos: newInventory
+          }
+        )
+        .then(() => {
+          showSuccess('Comanda actualizada correctamente')
+        })
+        .catch(err => {
+          console.error('Error:', err) // eslint-disable-line no-console
+          showError(err.message || 'No se acctualizo el estado')
+          return Promise.reject(err)
+        })
+    }
+  }),
+  withHandlers({
     postMovimiento: props => (listaProductos, idBarra, inventoryProduct) => {
       const newInventory = inventoryProduct
         .map(inventory =>
@@ -53,7 +79,7 @@ export default compose(
         )
         .shift()
 
-      const { firestore, showError, showSuccess, toggleDialog } = props
+      const { firestore, showError, showSuccess, toggleDialog, registerMovement } = props
       return firestore
         .update(
           { collection: 'inventarioBarra', doc: inventoryProduct[0].id },
@@ -64,15 +90,16 @@ export default compose(
         )
         .then(() => {
           toggleDialog()
-          showSuccess('Project added successfully')
+          showSuccess('Comanda actualizada correctamente')
+          registerMovement(idBarra, listaProductos)
         })
         .catch(err => {
           console.error('Error:', err) // eslint-disable-line no-console
-          showError(err.message || 'Could not add project')
+          showError(err.message || 'Error actualizando')
           return Promise.reject(err)
         })
     }
-  }),
+  }),  
   withHandlers({
     putComanda: props => (
       id,

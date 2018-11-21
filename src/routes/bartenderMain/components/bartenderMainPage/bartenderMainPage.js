@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Tabs } from 'components'
 import BartenderMainDetails from '../bartenderMainDetails'
 import BartenderProductsList from '../bartenderProductsList'
+import BartenderMovements from '../bartenderMovements'
 import classes from './bartenderMainPage.scss'
 
 export const bartenderMainPage = ({ userBarra, inventoryProduct }) => {
@@ -26,7 +27,7 @@ export const bartenderMainPage = ({ userBarra, inventoryProduct }) => {
           },
           {
             name: 'Movimientos',
-            content: ''
+            content: <BartenderMovements idBarra={userBarra.idBarra} />
           }
         ]}
       />
