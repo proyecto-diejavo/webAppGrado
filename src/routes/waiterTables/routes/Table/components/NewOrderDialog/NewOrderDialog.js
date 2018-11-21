@@ -5,19 +5,51 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import { Field } from 'redux-form'
+import { Field, FieldArray } from 'redux-form'
 import { TextField } from 'redux-form-material-ui'
 import { required } from 'utils/form'
 import { SelectField } from 'components'
 import MenuItem from '@material-ui/core/MenuItem'
 import classes from './NewOrderDialog.scss'
 
+const renderProducts = ({ fields, meta: { error, submitFailed } }) => (
+  <ul>
+    {fields.map((product, index) => (
+      <li key={index}>
+        <Button onClick={() => fields.remove(index)} color="primary">
+          Remove
+        </Button>
+        <h4>Product #{index + 1}</h4>
+        <Field
+          name={`${product}.idProducto`}
+          component={SelectField}
+          label="Producto">
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={'55x7MI8Bhj8l1SCynL6L'}>Botella Aguardiente Antioqueño X 300ml</MenuItem>
+          <MenuItem value={'swWBeJnLfPvBCz7BvnUf'}>Botella Ron Bacardi X 700ml</MenuItem>
+          <MenuItem value={'vCGDXocjJtOIGUUoZcAN'}>Agua Cristal X 150ml</MenuItem>
+        </Field>
+        <Field
+          name={`${product}.cantidad`}
+          type="text"
+          component={TextField}
+          label="cantidad"
+        />
+      </li>
+    ))}
+    <li>
+      <button type="button" onClick={() => fields.push({})}>
+        Agregar
+      </button>
+      {submitFailed && error && <span>{error}</span>}
+    </li>
+  </ul>
+)
+
 class NewOrderDialog extends Component {
-  state = {
-    age: '',
-    name: 'hai',
-    labelWidth: 0
-  }
+  state = { barra: '' }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
@@ -26,29 +58,23 @@ class NewOrderDialog extends Component {
   render() {
     const { open, onClose, handleSubmit } = this.props
     return (
-      <Dialog open={open} onClose={onClose}>
-        <DialogTitle id="simple-dialog-title">Crear Comanda</DialogTitle>
+      <Dialog open={open} onClose={onClose} fullWidth={true}>
+        <DialogTitle id="order-title">Crear Comanda</DialogTitle>
         <form onSubmit={handleSubmit} className={classes.inputs}>
           <DialogContent>
             <Field
-              name="barra"
-              component={TextField}
-              label="Barra"
-              validate={[required]}
-            />
-            <Field
-              name="j"
+              name="idBarra"
               component={SelectField}
-              label="j"
-              value={this.state.age}
+              label="Barra"
+              value={this.state.barra}
               onChange={this.handleChange}>
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={'aKrNooCLqfezpo2CfeU7'}>1</MenuItem>
+              <MenuItem value={'x6YXtpvtG2VibYYZluqr'}>2</MenuItem>
             </Field>
+            <FieldArray name="productos" component={renderProducts} />
           </DialogContent>
           <DialogActions>
             <Button onClick={onClose} color="secondary">
