@@ -4,7 +4,13 @@ import { isEmpty } from 'react-redux-firebase'
 import { OrderCard } from 'components'
 
 const resolveState = 'despachada'
-export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
+export const BartenderMainDetails = ({
+  children,
+  orders,
+  auth,
+  putComanda,
+  inventoryProduct
+}) =>
   children ? (
     cloneElement(children, { auth })
   ) : (
@@ -15,7 +21,15 @@ export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
             key={`orderCard-${index}`}
             order={order}
             title={`Mesa ${order.numeroMesa}`}
-            onClick={() => putComanda(order.id, resolveState)}
+            onClick={() =>
+              putComanda(
+                order.id,
+                resolveState,
+                order.productos,
+                order.idBarra,
+                inventoryProduct
+              )
+            }
             textModal={'¿Desea despachar la comanda?'}
           />
         ))}
@@ -26,7 +40,8 @@ BartenderMainDetails.propTypes = {
   children: PropTypes.object,
   auth: PropTypes.object,
   orders: PropTypes.object,
-  putComanda: PropTypes.func
+  putComanda: PropTypes.func,
+  inventoryProduct: PropTypes.object
 }
 
 export default BartenderMainDetails
