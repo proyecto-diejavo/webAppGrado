@@ -5,7 +5,7 @@ import BartenderMainDetails from '../bartenderMainDetails'
 import BartenderProductsList from '../bartenderProductsList'
 import classes from './bartenderMainPage.scss'
 
-export const bartenderMainPage = ({ userBarra }) => {
+export const bartenderMainPage = ({ userBarra, inventoryProduct }) => {
   if (!userBarra) return null
   return (
     <div className={classes.container}>
@@ -13,7 +13,12 @@ export const bartenderMainPage = ({ userBarra }) => {
         tabsArray={[
           {
             name: 'Comandas',
-            content: <BartenderMainDetails idBarra={userBarra.idBarra} />
+            content: (
+              <BartenderMainDetails
+                idBarra={userBarra.idBarra}
+                inventoryProduct={inventoryProduct}
+              />
+            )
           },
           {
             name: 'Inventario',
@@ -30,7 +35,8 @@ export const bartenderMainPage = ({ userBarra }) => {
 }
 
 bartenderMainPage.propTypes = {
-  userBarra: PropTypes.object
+  userBarra: PropTypes.object,
+  inventoryProduct: PropTypes.object
 }
 
 export default bartenderMainPage
