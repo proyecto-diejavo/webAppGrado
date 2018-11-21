@@ -35,8 +35,34 @@ export default compose(
     }
   ),
   withHandlers({
-    putComanda: props => (id, estado) => {
-      const { firestore, uid, showError, showSuccess } = props
+    postMovimiento: props => (listaProductos, idBarra) => {
+      listaProductos.forEach(element => {
+        const { firestore, showError, showSuccess, toggleDialog } = props
+        return firestore
+          .update(
+            {
+              collection: 'inventarioBarra',
+              doc: idBarra
+            },
+            {
+              Test: element.cantidad
+            }
+          )
+          .then(() => {
+            toggleDialog()
+            showSuccess('Project added successfully')
+          })
+          .catch(err => {
+            console.error('Error:', err) // eslint-disable-line no-console
+            showError(err.message || 'Could not add project')
+            return Promise.reject(err)
+          })
+      })
+    }
+  }),
+  withHandlers({
+    putComanda: props => (id, estado, listaProductos, idBarra) => {
+      const { firestore, uid, showError, showSuccess, postMovimiento } = props
       if (!uid) {
         return showError('Error cambiando el estado')
       }
@@ -49,30 +75,11 @@ export default compose(
         )
         .then(() => {
           showSuccess('Comanda actualizada correctamente')
+          postMovimiento(listaProductos, idBarra)
         })
         .catch(err => {
           console.error('Error:', err) // eslint-disable-line no-console
           showError(err.message || 'No se acctualizo el estado')
-          return Promise.reject(err)
-        })
-    },
-    postMovimiento: props => {
-      const { firestore, showError, showSuccess, toggleDialog } = props
-      return firestore
-        .add(
-          { collection: 'projects' },
-          {
-            createdBy: 'Javier',
-            createdAt: firestore.FieldValue.serverTimestamp()
-          }
-        )
-        .then(() => {
-          toggleDialog()
-          showSuccess('Project added successfully')
-        })
-        .catch(err => {
-          console.error('Error:', err) // eslint-disable-line no-console
-          showError(err.message || 'Could not add project')
           return Promise.reject(err)
         })
     }
