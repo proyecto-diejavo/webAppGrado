@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Tabs } from 'components'
 import CashierComandas from '../cashierComandas'
+import CashierBill from '../cashierBill'
 import classes from './cashierPage.scss'
 
 export const cashierPage = ({ cashier }) => (
@@ -14,7 +15,7 @@ export const cashierPage = ({ cashier }) => (
         },
         {
           name: 'Cuentas',
-          content: ''
+          content: <CashierBill />
         }
       ]}
     />

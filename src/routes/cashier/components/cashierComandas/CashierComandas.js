@@ -16,7 +16,7 @@ export const cashierComandas = ({ children, cuenta, auth, putComanda }) =>
             order={cuentas}
             title={`Mesa ${cuentas.numeroMesa}`}
             onClick={() => putComanda(cuentas.id, resolveState)}
-            textModal={'¿Desea confirmar la cancelación del serviccio?'}
+            textModal={'¿Desea confirmar la cancelación del servicio?'}
           />
         ))}
     </div>
