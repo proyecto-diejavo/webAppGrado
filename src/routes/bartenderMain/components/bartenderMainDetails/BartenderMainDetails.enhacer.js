@@ -45,8 +45,8 @@ export default compose(
           { collection: 'movimientoInventario' },
           {
             idOrigen: idBarra,
-            origen: "Barra",
-            tipo: "Salida",
+            origen: 'Barra',
+            tipo: 'Salida',
             productos: newInventory
           }
         )
@@ -79,7 +79,13 @@ export default compose(
         )
         .shift()
 
-      const { firestore, showError, showSuccess, toggleDialog, registerMovement } = props
+      const {
+        firestore,
+        showError,
+        showSuccess,
+        toggleDialog,
+        registerMovement
+      } = props
       return firestore
         .update(
           { collection: 'inventarioBarra', doc: inventoryProduct[0].id },
@@ -99,7 +105,7 @@ export default compose(
           return Promise.reject(err)
         })
     }
-  }),  
+  }),
   withHandlers({
     putComanda: props => (
       id,

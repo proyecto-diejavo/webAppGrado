@@ -12,7 +12,7 @@ export default compose(
   spinnerWhileLoading(['uid']),
   // create listener for cuenta, results go into redux
   firestoreConnect([
-    { collection: 'comanda', where: ['estado', '==', 'Por Cancelar'] }
+    { collection: 'comanda', where: ['estado', '==', 'por cancelar'] }
   ]),
   // map redux state to props
   connect(({ firestore: { ordered } }) => ({
