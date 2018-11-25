@@ -35,8 +35,80 @@ export default compose(
     }
   ),
   withHandlers({
-    putComanda: props => (id, estado) => {
+    registerMovement: props => (idBarra, newInventory ) => {
       const { firestore, uid, showError, showSuccess } = props
+      if (!uid) {
+        return showError('Error cambiando el estado')
+      }
+      return firestore
+        .add(
+          { collection: 'movimientoInventario' },
+          {
+            idOrigen: idBarra,
+            origen: "Barra",
+            tipo: "Salida",
+            productos: newInventory
+          }
+        )
+        .then(() => {
+          showSuccess('Comanda actualizada correctamente')
+        })
+        .catch(err => {
+          console.error('Error:', err) // eslint-disable-line no-console
+          showError(err.message || 'No se acctualizo el estado')
+          return Promise.reject(err)
+        })
+    }
+  }),
+  withHandlers({
+    postMovimiento: props => (listaProductos, idBarra, inventoryProduct) => {
+      const newInventory = inventoryProduct
+        .map(inventory =>
+          inventory.productos.map(product => {
+            const orderProduct = listaProductos
+              .filter(producto => producto.idProducto === product.idProducto)
+              .shift()
+            const productQuantity = orderProduct ? orderProduct.cantidad : 0
+            const newQuantity =
+              parseInt(product.cantidadProducto) - parseInt(productQuantity)
+            return {
+              ...product,
+              cantidadProducto: newQuantity
+            }
+          })
+        )
+        .shift()
+
+      const { firestore, showError, showSuccess, toggleDialog, registerMovement } = props
+      return firestore
+        .update(
+          { collection: 'inventarioBarra', doc: inventoryProduct[0].id },
+          {
+            ...inventoryProduct[0],
+            productos: newInventory
+          }
+        )
+        .then(() => {
+          toggleDialog()
+          showSuccess('Comanda actualizada correctamente')
+          registerMovement(idBarra, listaProductos)
+        })
+        .catch(err => {
+          console.error('Error:', err) // eslint-disable-line no-console
+          showError(err.message || 'Error actualizando')
+          return Promise.reject(err)
+        })
+    }
+  }),  
+  withHandlers({
+    putComanda: props => (
+      id,
+      estado,
+      listaProductos,
+      idBarra,
+      inventoryProduct
+    ) => {
+      const { firestore, uid, showError, showSuccess, postMovimiento } = props
       if (!uid) {
         return showError('Error cambiando el estado')
       }
@@ -49,30 +121,11 @@ export default compose(
         )
         .then(() => {
           showSuccess('Comanda actualizada correctamente')
+          postMovimiento(listaProductos, idBarra, inventoryProduct)
         })
         .catch(err => {
           console.error('Error:', err) // eslint-disable-line no-console
           showError(err.message || 'No se acctualizo el estado')
-          return Promise.reject(err)
-        })
-    },
-    postMovimiento: props => {
-      const { firestore, showError, showSuccess, toggleDialog } = props
-      return firestore
-        .add(
-          { collection: 'projects' },
-          {
-            createdBy: 'Javier',
-            createdAt: firestore.FieldValue.serverTimestamp()
-          }
-        )
-        .then(() => {
-          toggleDialog()
-          showSuccess('Project added successfully')
-        })
-        .catch(err => {
-          console.error('Error:', err) // eslint-disable-line no-console
-          showError(err.message || 'Could not add project')
           return Promise.reject(err)
         })
     }

@@ -3,7 +3,14 @@ import PropTypes from 'prop-types'
 import { isEmpty } from 'react-redux-firebase'
 import { OrderCard } from 'components'
 
-export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
+const resolveState = 'despachada'
+export const BartenderMainDetails = ({
+  children,
+  orders,
+  auth,
+  putComanda,
+  inventoryProduct
+}) =>
   children ? (
     cloneElement(children, { auth })
   ) : (
@@ -14,16 +21,27 @@ export const BartenderMainDetails = ({ children, orders, auth, putComanda }) =>
             key={`orderCard-${index}`}
             order={order}
             title={`Mesa ${order.numeroMesa}`}
+            onClick={() =>
+              putComanda(
+                order.id,
+                resolveState,
+                order.productos,
+                order.idBarra,
+                inventoryProduct
+              )
+            }
+            textModal={'¿Desea despachar la comanda?'}
           />
         ))}
     </div>
   )
 
 BartenderMainDetails.propTypes = {
-  children: PropTypes.object, // from react-router
-  auth: PropTypes.object, // from enhancer (connect + firebaseConnect - firebase)
-  orders: PropTypes.object, // from enhancer (firestoreConnect + connect)
-  putComanda: PropTypes.func
+  children: PropTypes.object,
+  auth: PropTypes.object,
+  orders: PropTypes.object,
+  putComanda: PropTypes.func,
+  inventoryProduct: PropTypes.object
 }
 
 export default BartenderMainDetails

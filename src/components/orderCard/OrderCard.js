@@ -1,43 +1,80 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Card } from 'components'
+import { Card, Confirm } from 'components'
 import { isEmpty } from 'react-redux-firebase'
-import classes from './OrderCard.scss'
+import classNames from 'classnames/bind'
 import UpdateIcon from '@material-ui/icons/Update'
-import CheckIcon from '@material-ui/icons/check'
+import CheckIcon from '@material-ui/icons/send'
 import CloseIcon from '@material-ui/icons/close'
+import WaitIcon from '@material-ui/icons/schedule'
+import classes from './OrderCard.scss'
 
-const renderIcon = state => {
-  if (state === 'Generada') return <UpdateIcon className={classes.icon} />
-  if (state === 'Despachada') return <CheckIcon className={classes.icon} />
-  if (state === 'Cancelada') return <CloseIcon className={classes.icon} />
-}
+const cx = classNames.bind(classes)
 
-export const OrderCard = ({ order, title }) => (
-  <div className={classes.container}>
-    <div className={classes.header}>
-      <div className={classes.title}> {title}</div>
-      {renderIcon(order.estado)}
-    </div>
-    <Card className={classes.orderCard}>
-      <div className={classes.products}>
-        {!isEmpty(order.productos) &&
-          order.productos.map((product, index) => (
-            <div key={`orderCard-${index}`} className={classes.product}>
-              <div className={classes.productName}>
-                {product.nombreProducto}
-              </div>
-              <div className={classes.productCount}>{product.cantidad}</div>
-            </div>
-          ))}
+class OrderCard extends Component {
+  state = {
+    showConfirm: false
+  }
+
+  handleChange = () => {
+    this.setState({ showConfirm: !this.state.showConfirm })
+  }
+  renderIcon = state => {
+    switch (state) {
+      case 'generada':
+        return <CheckIcon className={classes.icon} />
+      case 'cancelada':
+        return <CloseIcon className={classes.icon} />
+      case 'por cancelar':
+        return <UpdateIcon className={classes.icon} />
+    }
+  }
+  onConfirm = () => {
+    const { onClick } = this.props
+    onClick()
+    this.handleChange()
+  }
+  renderConfirm = textModal => (
+    <Confirm
+      open={this.state.showConfirm}
+      message={textModal}
+      onCancel={this.handleChange}
+      onConfirm={this.onConfirm}
+    />
+  )
+  render() {
+    const { order, title, textModal } = this.props
+    const closed = order.estado === 'despachada'
+    return (
+      <div className={classes.container}>
+        <div className={classes.header}>
+          <div className={cx('title', { closed })}> {title}</div>
+          <div onClick={this.handleChange}>{this.renderIcon(order.estado)}</div>
+        </div>
+        <Card className={cx('orderCard', { closed })}>
+          <div className={classes.products}>
+            {!isEmpty(order.productos) &&
+              order.productos.map((product, index) => (
+                <div key={`orderCard-${index}`} className={classes.product}>
+                  <div className={classes.productName}>
+                    {product.nombreProducto}
+                  </div>
+                  <div className={classes.productCount}>{product.cantidad}</div>
+                </div>
+              ))}
+          </div>
+        </Card>
+        {this.renderConfirm(textModal)}
       </div>
-    </Card>
-  </div>
-)
+    )
+  }
+}
 
 OrderCard.propTypes = {
   order: PropTypes.object.isRequired,
-  title: PropTypes.object.isRequired
+  title: PropTypes.object.isRequired,
+  onClick: PropTypes.object,
+  textModal: PropTypes.string
 }
 
 export default OrderCard

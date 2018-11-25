@@ -2,25 +2,30 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { withHandlers, withStateHandlers, pure } from 'recompose'
+import { withNotifications } from 'modules/notification'
+import { withRouter, spinnerWhileLoading } from 'utils/components'
 import { UserIsAuthenticated } from 'utils/router'
 
 export default compose(
   UserIsAuthenticated,
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
-  firestoreConnect(({ params, uid, table }) => [
-    {
-      collection: 'comanda',
-      where: [['idMesero', '==', uid], ['idMesa', '==', table]]
-    }
+  spinnerWhileLoading(['uid']),
+  // create listener for cuenta, results go into redux
+  firestoreConnect([
+    { collection: 'comanda', where: ['estado', '==', 'Por Cancelar'] }
   ]),
+  // map redux state to props
   connect(({ firestore: { ordered } }) => ({
-    orders: ordered.comanda
+    cuenta: ordered.comanda
   })),
-  // spinnerWhileLoading(['orders']),
+  withRouter,
+  withNotifications,
   withStateHandlers(
+    // Setup initial state
     ({ initialDialogOpen = false }) => ({
       newDialogOpen: initialDialogOpen
     }),
+    // Add state handlers as props
     {
       toggleDialog: ({ newDialogOpen }) => () => ({
         newDialogOpen: !newDialogOpen
@@ -28,36 +33,24 @@ export default compose(
     }
   ),
   withHandlers({
-    addOrder: props => newInstance => {
-      const {
-        firestore,
-        uid,
-        table,
-        showError,
-        showSuccess,
-        toggleDialog
-      } = props
+    putComanda: props => (id, estado) => {
+      const { firestore, uid, showError, showSuccess } = props
       if (!uid) {
-        return showError('inicia sesión para crear una comanda')
+        return showError('Error confirmando la cancelación.')
       }
       return firestore
-        .add(
-          { collection: 'comanda' },
+        .update(
+          { collection: 'comanda', doc: id },
           {
-            ...newInstance,
-            idMesero: uid,
-            idMesa: table,
-            estado: 'generada',
-            fecha: firestore.FieldValue.serverTimestamp()
+            estado: estado
           }
         )
         .then(() => {
-          toggleDialog()
-          showSuccess('¡Comanda creada!')
+          showSuccess('Comanda actualizada correctamente')
         })
         .catch(err => {
           console.error('Error:', err) // eslint-disable-line no-console
-          showError(err.message || 'La comanda no se ha podido registrar')
+          showError(err.message || 'No se acctualizo el estado')
           return Promise.reject(err)
         })
     }
