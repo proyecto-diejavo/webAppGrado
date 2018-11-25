@@ -9,6 +9,8 @@ import BartenderMainRoute from './bartenderMain'
 import adminMainRoute from './adminMain'
 import usersRoute from './users'
 import WaiterTablesRoute from './waiterTables'
+import adminBarRoute from './adminBar'
+import journeyRoute from './journey'
 import cashierRoute from './cashier'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -27,6 +29,8 @@ export const createRoutes = store => ({
     adminMainRoute(store),
     usersRoute(store),
     WaiterTablesRoute(store),
+    adminBarRoute(store),
+    journeyRoute(store),
     usersRoute(store),
     cashierRoute(store),
     // AsyncRoute(store) // async routes setup by passing store
