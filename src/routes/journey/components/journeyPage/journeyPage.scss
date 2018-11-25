@@ -1,0 +1,24 @@
+@import 'base';
+
+.tblProducts {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tblProducts thead tr{
+    color: white;
+    background-color: #032b35;
+}
+
+.tblProducts thead tr th, tbody tr td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tblProducts tbody tr:nth-child(odd){background-color: #A0A0A0;}
+.tblProducts tbody tr:nth-child(even){background-color:#ddd;}
+
+.CenterText{
+    text-align: center !important;
+}
