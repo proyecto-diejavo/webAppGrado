@@ -9,7 +9,7 @@ export default compose(
   firestoreConnect(({ params, uid }) => [
     {
       collection: 'cuenta',
-      where: ['estado', '==', 'Por Cerrar']
+      where: ['estado', '==', 'por cerrar']
     }
   ]),
   connect(({ firestore: { ordered } }) => ({
