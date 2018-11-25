@@ -3,6 +3,10 @@
 .container {
   padding: 2rem;
 }
+.content {
+  width: 100%;
+}
+
 .inputs {
   @extend .flex-column-center;
   justify-content: center;
@@ -15,3 +19,43 @@
   @extend .flex-column-center;
   justify-content: center;
 }
+.products {
+  // width: 100%;
+  padding: 4px;
+  border: 0.5px $lightGray solid;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  .product:not(:nth-last-child(1)) {
+    border-bottom: 1px $gray solid;
+  }
+  .productField {
+    padding: 2px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 30px;
+    align-items: center;
+  }
+  .product {
+    width: 200px;
+  }
+}
+.tableCell {
+  padding: 5px !important;
+  text-align: center !important;
+}
+.dialog {
+  background-color: $darkGreen !important;
+}
+.filters {
+  display: flex;
+}
+.select {
+  @extend .filters;
+  flex-direction: column
+}
+
+.bar {
+  width: 30px;
+} 
