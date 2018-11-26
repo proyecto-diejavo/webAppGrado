@@ -1,18 +1,8 @@
-import capitalize from 'js-capitalize'
-
-const options = {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric'
+const DateFormat = date => {
+  const initialDate = new Date(date)
+  const tomorrow = new Date(initialDate.getTime() + 24 * 60 * 60 * 1000)
+  const formatedDate = tomorrow.toLocaleDateString()
+  return formatedDate
 }
 
-const DateFormat = date =>
-  date
-    .toLocaleDateString('es', options)
-    .split(' ')
-    .join('/')
-    .replace(/\./g, '')
-
-const format = val => capitalize.words(`${DateFormat(val)}`)
-
-export default format
+export default DateFormat

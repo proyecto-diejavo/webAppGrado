@@ -12,8 +12,7 @@ export default compose(
   firestoreConnect(({ fecha }) => [
     {
       collection: 'cuenta',
-      where: [['estado', '==', 'cerrada'], ['fecha', '==', fecha]],
-      orderBy: ['fecha', 'desc']
+      where: [['estado', '==', 'cerrada'], ['fecha', '==', fecha]]
     }
   ]),
   connect(({ firestore: { ordered } }) => {

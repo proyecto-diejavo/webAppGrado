@@ -9,8 +9,7 @@ import BillsByDate from '../billsByDate'
 class billsPage extends Component {
   state = { fecha: '' }
   onChangeDate = value => {
-    const j = DateFormat(value)
-    this.setState({ fecha: j })
+    this.setState({ fecha: DateFormat(value) })
   }
   render() {
     return (
