@@ -47,7 +47,7 @@ export default compose(
             ...newInstance,
             idMesero: uid,
             idMesa: table,
-            estado: 'Creada',
+            estado: 'generada',
             fecha: firestore.FieldValue.serverTimestamp()
           }
         )

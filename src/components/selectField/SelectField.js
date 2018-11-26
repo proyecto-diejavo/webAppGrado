@@ -2,7 +2,10 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import Select from '@material-ui/core/Select'
+import classNames from 'classnames/bind'
+import classes from './SelectField.scss'
 
+const cx = classNames.bind(classes)
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -24,9 +27,10 @@ export const SelectField = ({
   children
 }) => (
   <Select
-    name="numero"
     inputProps={{ ...input }}
-    input={<OutlinedInput labelWidth={0} />}>
+    input={
+      <OutlinedInput className={cx('input', input.class)} labelWidth={0} />
+    }>
     {children}
   </Select>
 )

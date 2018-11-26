@@ -19,7 +19,7 @@ class Bill extends Component {
     if (isEmpty(bill)) return null
     return (
       <Dialog open={open} onClose={onClose} fullWidth={true}>
-        <DialogTitle id="simple-dialog-title">{`Cuenta ${bill.estado}`}</DialogTitle>
+        <DialogTitle id="bill-title">{`Cuenta ${bill.estado}`}</DialogTitle>
         <DialogContent className={classes.content}>
           <div className={classes.products}>
             {bill.productos.map((product, index) => (
