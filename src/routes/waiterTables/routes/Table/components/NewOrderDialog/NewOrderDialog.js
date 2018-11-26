@@ -6,11 +6,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import Typography from '@material-ui/core/Typography'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { Field, FieldArray } from 'redux-form'
 import { TextField } from 'redux-form-material-ui'
@@ -20,53 +15,83 @@ import MenuItem from '@material-ui/core/MenuItem'
 import classes from './NewOrderDialog.scss'
 
 class NewOrderDialog extends Component {
-  state = { barra: '', origen: '' }
-
+  state = { barra: '', destino: '' }
+  onSelectChange = (field, id, data, name) => {
+    if (!id) return
+    const namedata = data
+      .filter(obj => obj.id === id)
+      .map(obj => {
+        const { [name]: fiterName } = obj
+        return fiterName
+      })
+      .shift()
+    this.props.change(field, namedata)
+  }
   renderProducts = ({ fields, meta: { error, submitFailed } }) => {
     const { productosBarra, productosCocina } = this.props
     const products =
-      this.state.origen === 'cocina' ? productosCocina : productosBarra
+      this.state.destino === 'cocina' ? productosCocina : productosBarra
     return (
       <Fragment>
-        <Paper className={classes.root}>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <TableCell className={classes.tableCell}>Producto</TableCell>
-                <TableCell className={classes.tableCell}>Cantidad</TableCell>
-                <TableCell className={classes.tableCell}>Eliminar</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {fields.map((product, index) => {
-                return (
-                  <TableRow key={index}>
-                    <TableCell className={classes.tableCell}>
-                      <Field name={`${product}.idProducto`} component={SelectField}>
-                        {products &&
-                          products.map(product => (
-                            <MenuItem value={product.id}>{product.nombre}</MenuItem>
-                          ))}
-                      </Field>
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      <Field
-                        name={`${product}.cantidad`}
-                        type="text"
-                        component={TextField}
-                      />
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      <Button onClick={() => fields.remove(index)} color="primary">
-                        x
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </Table>
-        </Paper>
+        {fields.length > 0 && (
+          <Paper className={classes.root}>
+            <table className={classes.tblProducts}>
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {fields.map((field, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>
+                        <Field
+                          component={TextField}
+                          name={`${field}.nombreProducto`}
+                          type="hidden"
+                          style={{ height: 0 }}
+                        />
+                        <Field
+                          name={`${field}.idProducto`}
+                          onChange={evt =>
+                            this.onSelectChange(
+                              `${field}.nombreProducto`,
+                              evt.target.value,
+                              this.props.productos,
+                              'nombre'
+                            )
+                          }
+                          component={SelectField}>
+                          {products &&
+                            products.map(product => (
+                              <MenuItem value={product.id}>
+                                {product.nombre}
+                              </MenuItem>
+                            ))}
+                        </Field>
+                      </td>
+                      <td>
+                        <Field
+                          name={`${field}.cantidad`}
+                          type="text"
+                          component={TextField}
+                        />
+                      </td>
+                      <td>
+                        <Button onClick={() => fields.remove(index)} color="primary">
+                          x
+                        </Button>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </Paper>
+        )}
         <div>
           <AddNewButton onClick={() => fields.push({})} />
           {submitFailed && error && <span>{error}</span>}
@@ -76,21 +101,47 @@ class NewOrderDialog extends Component {
   }
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
+    this.onSelectChange(
+      'bartender',
+      event.target.value,
+      this.props.barras,
+      'bartender'
+    )
+    this.onSelectChange(
+      'idBartender',
+      event.target.value,
+      this.props.barras,
+      'idBartender'
+    )
   }
   renderOrigin = () => {
     const { barras } = this.props
-    if (!this.state.origen || this.state.origen !== 'barra') return null
+    if (!this.state.destino || this.state.destino !== 'barra') return null
     return (
       <div className={classes.select}>
         <Typography className={classes.title} component="p">
           Barra
         </Typography>
         <Field
+          component={TextField}
+          name={'bartender'}
+          type="hidden"
+          style={{ height: 0 }}
+        />
+        <Field
+          component={TextField}
+          name={'idBartender'}
+          type="hidden"
+          style={{ height: 0 }}
+        />
+        <Field
           name="idBarra"
           component={SelectField}
+          className={classes.bar}
           label="Barra"
           value={this.state.barra}
-          onChange={this.handleChange}>
+          onChange={this.handleChange}
+          validate={[required]}>
           {barras &&
             barras.map(barra => (
               <MenuItem value={barra.id}>{barra.numero}</MenuItem>
@@ -112,9 +163,9 @@ class NewOrderDialog extends Component {
                   Destino
                 </Typography>
                 <Field
-                  name="origen"
+                  name="destino"
                   component={SelectField}
-                  value={this.state.origen}
+                  value={this.state.destino}
                   onChange={this.handleChange}>
                   <MenuItem value={'barra'}>Barra</MenuItem>
                   <MenuItem value={'cocina'}>Cocina</MenuItem>
@@ -139,6 +190,7 @@ class NewOrderDialog extends Component {
 }
 
 NewOrderDialog.propTypes = {
+  productos: PropTypes.object,
   barras: PropTypes.object,
   productosBarra: PropTypes.object,
   productosCocina: PropTypes.object,

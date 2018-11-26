@@ -50,12 +50,26 @@
 }
 .filters {
   display: flex;
+  flex-direction: column;
 }
 .select {
   @extend .filters;
   flex-direction: column
 }
+.tblProducts {
+  border-collapse: collapse;
+  width: 100%;
+}
 
-.bar {
-  width: 30px;
-} 
+.tblProducts thead tr{
+  color: $white;
+  background-color: $darkGreen;
+  th {
+    text-align: center !important;
+  }
+}
+
+.tblProducts thead tr th, tbody tr td {
+  padding: 5px;
+  border-bottom: 1px solid $softGreen;
+}

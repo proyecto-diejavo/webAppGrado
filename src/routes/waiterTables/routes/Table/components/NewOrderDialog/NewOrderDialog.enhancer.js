@@ -8,12 +8,17 @@ export default compose(
   UserIsAuthenticated,
   firestoreConnect(({ params }) => [
     {
-      collection: 'barra'
+      collection: 'jornada',
+      orderBy: ['fecha', 'desc']
     }
   ]),
-  connect(({ firestore: { ordered } }) => ({
-    barras: ordered.barra
-  })),
+  connect(({ firestore: { ordered } }) => {
+    if (!ordered.jornada) return null
+    const jornada = ordered.jornada.shift()
+    return {
+      barras: jornada.barras
+    }
+  }),
   firestoreConnect(({ params }) => [
     {
       collection: 'productos',
@@ -23,6 +28,7 @@ export default compose(
   connect(({ firestore: { ordered } }) => {
     if (!ordered.productos) return null
     return {
+      productos: ordered.productos,
       productosBarra: ordered.productos.filter(
         producto => producto.origen === 'barra'
       ),
