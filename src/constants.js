@@ -12,6 +12,7 @@ export const NEW_PROJECT_FORM_NAME = 'newProject'
 export const ADMIN_MAIN_PATH = '/adminMain'
 export const USERS_PATH = '/users'
 export const CASHIER_PATH = '/cashier'
+export const BILLS_PATH = '/bills'
 
 export const formNames = {
   account: ACCOUNT_FORM_NAME,

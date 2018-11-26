@@ -1,0 +1,20 @@
+@import 'base';
+
+.container {
+    display: flex;
+    color: $white !important;
+}
+.fieldContainer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    width: 103px;
+    border-radius: 6px;
+    padding-left: 5px;
+  }
+  .title {
+      color: $white;
+  }
+  .textField {
+    width: 103px;
+  }
