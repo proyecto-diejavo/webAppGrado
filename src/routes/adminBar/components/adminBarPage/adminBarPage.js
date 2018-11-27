@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Tabs } from 'components'
 import AdminBarBarras from '../adminBarBarras'
 import AdminBarMesas from '../adminBarMesas'
+import AdminBarZonas from '../adminBarZonas'
 import classes from './adminBarPage.scss'
 
 export const adminBarPage = ({ adminBar }) => (
@@ -15,7 +16,7 @@ export const adminBarPage = ({ adminBar }) => (
         },
         {
           name: 'Zonas',
-          content: ''
+          content: <AdminBarZonas />
         },
         {
           name: 'Mesas',
