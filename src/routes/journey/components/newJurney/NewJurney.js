@@ -191,10 +191,10 @@ class NewJurney extends Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={onRequestClose} color="secondary">
-              Cancel
+              Cancelar
             </Button>
             <Button type="submit" color="primary">
-              Create
+              Registrar
             </Button>
           </DialogActions>
         </form>

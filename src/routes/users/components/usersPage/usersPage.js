@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { isEmpty } from 'react-redux-firebase'
 import classes from './usersPage.scss'
-import DeleteIcon from '@material-ui/icons/delete'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 export const usersPage = ({ users, goToAddUser }) => (
