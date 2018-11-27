@@ -16,10 +16,18 @@ import classes from './NewOrderDialog.scss'
 
 class NewOrderDialog extends Component {
   state = { barra: '', destino: '' }
+
   onSelectChange = (field, val) => {
     this.props.change(field, val.trim())
   }
-
+  selectProduct = (field, evt) => {
+    this.onSelectChange(`${field}.nombreProducto`, evt.currentTarget.outerText)
+    const valorUnitario = this.props.productos
+      .filter(product => product.id === evt.target.value)
+      .map(prod => prod.valorUnitario)
+      .shift()
+    this.onSelectChange(`${field}.valorUnitario`, valorUnitario)
+  }
   selectBarData = (field, value) => {
     if (!value) return
     const namedata = this.props.barras
@@ -56,16 +64,17 @@ class NewOrderDialog extends Component {
                           component={TextField}
                           name={`${field}.nombreProducto`}
                           type="hidden"
-                          style={{ height: 0 }}
+                          style={{ display: 'none' }}
+                        />
+                        <Field
+                          component={TextField}
+                          name={`${field}.valorUnitario`}
+                          type="hidden"
+                          style={{ display: 'none' }}
                         />
                         <Field
                           name={`${field}.idProducto`}
-                          onChange={evt =>
-                            this.onSelectChange(
-                              `${field}.nombreProducto`,
-                              evt.currentTarget.outerText
-                            )
-                          }
+                          onChange={evt => this.selectProduct(field, evt)}
                           component={SelectField}>
                           {products &&
                             products.map(product => (
@@ -122,19 +131,19 @@ class NewOrderDialog extends Component {
           component={TextField}
           name={'numeroBarra'}
           type="hidden"
-          style={{ height: 0 }}
+          style={{ display: 'none' }}
         />
         <Field
           component={TextField}
           name={'bartender'}
           type="hidden"
-          style={{ height: 0 }}
+          style={{ display: 'none' }}
         />
         <Field
           component={TextField}
           name={'idBartender'}
           type="hidden"
-          style={{ height: 0 }}
+          style={{ display: 'none' }}
         />
         <Field
           name="idBarra"
