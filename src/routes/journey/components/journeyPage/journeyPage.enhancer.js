@@ -12,24 +12,78 @@ export default compose(
   spinnerWhileLoading(['uid']),
 
   firestoreConnect([{ collection: 'jornada' }]),
-  // map redux state to props
   connect(({ firestore: { ordered } }) => ({
     jurney: ordered.jornada
   })),
+  firestoreConnect([{ collection: 'barra' }]),
+  connect(({ firestore: { ordered } }) => ({
+    barra: ordered.barra
+  })),
+  firestoreConnect([{ collection: 'zona' }]),
+  connect(({ firestore: { ordered } }) => ({
+    zona: ordered.zona
+  })),
+  firestoreConnect([
+    {
+      collection: 'users'
+    }
+  ]),
+  connect(({ firestore: { ordered } }) => {
+    if (!ordered.users) return null
+    return {
+      mesero: ordered.users.filter(users => users.cargo === 'mesero'),
+      bartender: ordered.users.filter(users => users.cargo === 'bartender')
+    }
+  }),
   withRouter,
   withNotifications,
   withStateHandlers(
-    // Setup initial state
     ({ initialDialogOpen = false }) => ({
-      newDialogOpen: initialDialogOpen
+      newDialogOpen: initialDialogOpen,
+      newDialogOpen1: initialDialogOpen
     }),
-    // Add state handlers as props
     {
       toggleDialog: ({ newDialogOpen }) => () => ({
         newDialogOpen: !newDialogOpen
+      }),
+      toggleDialog1: ({ newDialogOpen1 }) => () => ({
+        newDialogOpen1: !newDialogOpen1
       })
     }
   ),
-  withHandlers({}),
+  withHandlers({
+    addJourney: props => newInstance => {
+      const dateSystem = new Date()
+      const { firestore, uid, showError, showSuccess, toggleDialog1 } = props
+      if (!uid) {
+        return showError('Debe iniciar sesión para crear una jornada')
+      }
+      if (Object.keys(newInstance).length === 0) {
+        return showError('Debe agregar información para poder guardar')
+      }
+      return firestore
+        .add(
+          { collection: 'jornada' },
+          {
+            ...newInstance,
+            fecha:
+              dateSystem.getDate() +
+              '/' +
+              dateSystem.getMonth() +
+              '/' +
+              dateSystem.getFullYear()
+          }
+        )
+        .then(() => {
+          toggleDialog1()
+          showSuccess('Jornada agregada exitosamente')
+        })
+        .catch(err => {
+          console.error('Error:', err) // eslint-disable-line no-console
+          showError(err.message || 'error agredando jornada')
+          return Promise.reject(err)
+        })
+    }
+  }),
   pure
 )

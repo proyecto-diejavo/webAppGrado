@@ -58,11 +58,11 @@ export default compose(
         )
         .then(() => {
           toggleDialog()
-          showSuccess('Project added successfully')
+          showSuccess('Mesa agregada correctamente')
         })
         .catch(err => {
           console.error('Error:', err) // eslint-disable-line no-console
-          showError(err.message || 'Could not add project')
+          showError(err.message || 'no se pudo agregar la mesa')
           return Promise.reject(err)
         })
     },
@@ -70,10 +70,10 @@ export default compose(
       const { firestore, showError, showSuccess } = props
       return firestore
         .delete({ collection: 'mesa', doc: mesaId })
-        .then(() => showSuccess('Project deleted successfully'))
+        .then(() => showSuccess('Mesa eliminada correctamente'))
         .catch(err => {
           console.error('Error:', err) // eslint-disable-line no-console
-          showError(err.message || 'Could not delete project')
+          showError(err.message || 'no se puedo eliminar la mesa')
           return Promise.reject(err)
         })
     }

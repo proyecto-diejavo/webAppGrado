@@ -57,7 +57,16 @@
   line-height: 30px;
 }
 
-.inputDescription{
+.inputDescription label{
+  color: white !important;
+}
+
+.inputDescription div input{
+  color: white !important;
+  border-bottom: 1px solid #ddd !important;
+}
+
+.MuiFormLabel-root-125{
   color: white !important;
 }
 

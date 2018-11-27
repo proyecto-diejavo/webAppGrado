@@ -2,40 +2,39 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { isEmpty } from 'react-redux-firebase'
 import classes from './usersPage.scss'
-import DeleteIcon from '@material-ui/icons/delete'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-export const usersPage = ({ users }) => (
+export const usersPage = ({ users, goToAddUser }) => (
   <div>
     <table className={classes.tblProducts}>
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Cargo</th>
-          <th className={classes.textAlignC}>Eliminar</th>
+          <th className={classes.textAlignC}>Nombre</th>
+          <th className={classes.textAlignC}>Cargo</th>
         </tr>
       </thead>
       <tbody>
         {!isEmpty(users) &&
           users.map((user, ind) => (
             <tr>
-              <td>{user.username}</td>
-              <td>{user.cargo}</td>
-              <td className={classes.textAlignC}>
-                <DeleteIcon className={classes.deleteIcon} />
-              </td>
+              <td className={classes.textAlignC}>{user.username}</td>
+              <td className={classes.textAlignC}>{user.cargo}</td>
             </tr>
           ))}
       </tbody>
     </table>
     <div className={classes.contentIconAdd}>
-      <ContentAddCircle className={classes.addIcon} />
+      <ContentAddCircle
+        className={classes.addIcon}
+        onClick={() => goToAddUser()}
+      />
     </div>
   </div>
 )
 
 usersPage.propTypes = {
-  users: PropTypes.object // from enhancer (firestoreConnect + connect)
+  users: PropTypes.object,
+  goToAddUser: PropTypes.function
 }
 
 export default usersPage

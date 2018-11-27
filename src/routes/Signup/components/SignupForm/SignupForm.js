@@ -11,19 +11,37 @@ const SignupForm = ({ pristine, submitting, handleSubmit }) => (
     <Field
       name="username"
       component={TextField}
-      label="Username"
+      label="Nombre Usuario"
       validate={required}
     />
     <Field
       name="email"
       component={TextField}
-      label="Email"
+      label="Correo"
       validate={[required, validateEmail]}
+    />
+    <Field
+      name="numeroDocumento"
+      component={TextField}
+      label="Número Documento"
+      validate={required}
+    />
+    <Field
+      name="cargo"
+      component={TextField}
+      label="Cargo"
+      validate={required}
+    />
+    <Field
+      name="telefono"
+      component={TextField}
+      label="Teléfono"
+      validate={required}
     />
     <Field
       name="password"
       component={TextField}
-      label="Password"
+      label="Contraseña"
       type="password"
       validate={required}
     />
@@ -33,7 +51,7 @@ const SignupForm = ({ pristine, submitting, handleSubmit }) => (
         type="submit"
         raised
         disabled={pristine || submitting}>
-        {submitting ? 'Loading' : 'Sign Up'}
+        {submitting ? 'Loading' : 'Registrar'}
       </Button>
     </div>
   </form>
