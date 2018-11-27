@@ -11,20 +11,6 @@ import { MoneyFormat } from 'formaters'
 export const productInventoryPage = ({ products, deleteProduct }) => (
   <div className={classes.container}>
     <div className={classes.addBarras}>
-      <div className={classes.addBarrasDetails}>
-        <div className={classes.divInput}>
-          <Field
-            fullWidth
-            name="displayName"
-            component={TextField}
-            label="Display Name"
-            className={classes.inputDescription}
-          />
-        </div>
-        <div className={classes.divIcon}>
-          <ContentAddCircle />
-        </div>
-      </div>
       <div>
         <table className={classes.tblProducts}>
           <thead>
