@@ -6,7 +6,6 @@ import { withHandlers, pure } from 'recompose'
 import { withRouter, spinnerWhileLoading } from 'utils/components'
 import { UserIsAuthenticated, RouteByRol } from 'utils/router'
 
-const fecha = '26/10/2018'
 export default compose(
   UserIsAuthenticated,
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
@@ -28,19 +27,6 @@ export default compose(
       username: user.username
     }
   }),
-  firestoreConnect(({ params }) => [
-    {
-      collection: 'jornada',
-      where: ['fecha', '==', fecha]
-    }
-  ]),
-  connect(({ firestore: { ordered } }) => {
-    if (!ordered.jornada) return null
-    return {
-      jornada: ordered.jornada
-    }
-  }),
-  spinnerWhileLoading(['jornada']),
   withRouter,
   withHandlers({
     goToRoute: ({ router, route }) => () => {

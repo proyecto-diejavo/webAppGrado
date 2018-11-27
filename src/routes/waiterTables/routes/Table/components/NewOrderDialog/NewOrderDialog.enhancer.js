@@ -1,37 +1,28 @@
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
+import { spinnerWhileLoading } from 'utils/components'
 import { UserIsAuthenticated } from 'utils/router'
+import { DateFormat } from 'formaters'
 import { compose } from 'redux'
 
-const fecha = '26/10/2018'
+const today = new Date()
 export default compose(
   UserIsAuthenticated,
   firestoreConnect(({ params }) => [
     {
       collection: 'jornada',
-      where: ['fecha', '==', fecha]
+      where: ['fecha', '==', DateFormat(today)]
     }
   ]),
   connect(({ firestore: { ordered } }) => {
-    if (!ordered.jornada) return null
-    const jornada = ordered.jornada.shift()
-    if (!jornada.barras) return null
+    if (!ordered.jornada || !ordered.jornada.length) return null
     return {
-      barras: jornada.barras
+      barras: ordered.jornada[0].barras
     }
   }),
-  // firestoreConnect(({ params }) => [
-  //   {
-  //     collection: 'barra'
-  //   }
-  // ]),
-  // connect(({ firestore: { ordered } }) => {
-  //   if (!ordered.barra) return null
-  //   return {
-  //     barras: ordered.barra
-  //   }
-  // }),
+  spinnerWhileLoading(['barras']),
+
   firestoreConnect(({ params }) => [
     {
       collection: 'productos',

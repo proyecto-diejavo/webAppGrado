@@ -16,12 +16,16 @@ import classes from './NewOrderDialog.scss'
 
 class NewOrderDialog extends Component {
   state = { barra: '', destino: '' }
-  onSelectChange = (field, id, data, name) => {
-    if (!id) return
-    const namedata = data
-      .filter(obj => obj.id === id)
+  onSelectChange = (field, val) => {
+    this.props.change(field, val.trim())
+  }
+
+  selectBarData = (field, value) => {
+    if (!value) return
+    const namedata = this.props.barras
+      .filter(obj => obj.numeroBarra === value.trim())
       .map(obj => {
-        const { [name]: fiterName } = obj
+        const { [field]: fiterName } = obj
         return fiterName
       })
       .shift()
@@ -59,9 +63,7 @@ class NewOrderDialog extends Component {
                           onChange={evt =>
                             this.onSelectChange(
                               `${field}.nombreProducto`,
-                              evt.target.value,
-                              this.props.productos,
-                              'nombre'
+                              evt.currentTarget.outerText
                             )
                           }
                           component={SelectField}>
@@ -102,20 +104,11 @@ class NewOrderDialog extends Component {
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
   }
-  handleChangeBar = event => {
-    this.handleChange(event)
-    this.onSelectChange(
-      'bartender',
-      event.target.value,
-      this.props.barras,
-      'bartender'
-    )
-    this.onSelectChange(
-      'idBartender',
-      event.target.value,
-      this.props.barras,
-      'idBartender'
-    )
+  handleChangeBar = evt => {
+    this.handleChange(evt)
+    this.onSelectChange('numeroBarra', evt.currentTarget.outerText)
+    this.selectBarData('bartender', evt.currentTarget.outerText)
+    this.selectBarData('idBartender', evt.currentTarget.outerText)
   }
   renderOrigin = () => {
     const { barras } = this.props
@@ -125,6 +118,12 @@ class NewOrderDialog extends Component {
         <Typography className={classes.title} component="p">
           Barra
         </Typography>
+        <Field
+          component={TextField}
+          name={'numeroBarra'}
+          type="hidden"
+          style={{ height: 0 }}
+        />
         <Field
           component={TextField}
           name={'bartender'}
@@ -170,8 +169,8 @@ class NewOrderDialog extends Component {
                   component={SelectField}
                   value={this.state.destino}
                   onChange={this.handleChange}>
-                  <MenuItem value={'barra'}>Barra</MenuItem>
-                  <MenuItem value={'cocina'}>Cocina</MenuItem>
+                  <MenuItem value={'Barra'}>Barra</MenuItem>
+                  <MenuItem value={'Cocina'}>Cocina</MenuItem>
                 </Field>
               </div>
               {this.renderOrigin()}

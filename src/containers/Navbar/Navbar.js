@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import AccountMenu from './AccountMenu'
 import LoginMenu from './LoginMenu'
 import { LIST_PATH } from 'constants'
-import { logoWhite } from 'images'
+import { iconWhite } from 'images'
 
 export const Navbar = ({
   avatarUrl,
@@ -30,7 +30,7 @@ export const Navbar = ({
         to={authExists ? LIST_PATH : '/'}>
         Home
       </Typography> */}
-      <img alt="" src={logoWhite} className={classes.logo} />
+      <img alt="" src={iconWhite} className={classes.logo} />
       {/* <Typography
         variant="title"
         color="inherit"
