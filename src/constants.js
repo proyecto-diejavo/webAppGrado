@@ -15,7 +15,7 @@ export const ADMIN_BAR_PATH = '/adminBar'
 export const JOURNEY_PATH = '/journey'
 export const CASHIER_PATH = '/cashier'
 export const BILLS_PATH = '/bills'
-
+export const MAIN_PATH = '/main'
 
 export const formNames = {
   account: ACCOUNT_FORM_NAME,
@@ -28,6 +28,27 @@ export const paths = {
   account: ACCOUNT_PATH,
   login: LOGIN_PATH,
   signup: SIGNUP_PATH
+}
+
+export const rolPaths = {
+  bartender: BARTENDER_MAIN_PATH,
+  mesero: WAITER_TABLES_PATH,
+  administrador: ADMIN_BAR_PATH,
+  cajero: CASHIER_PATH,
+  cocina: BARTENDER_MAIN_PATH
+}
+export const states = {
+  order: {
+    open: 'abierta',
+    dispatched: 'despachada',
+    toCancel: 'por cancelar',
+    cancel: 'cancelada'
+  },
+  bill: {
+    open: 'abierta',
+    toClose: 'por cerrar',
+    closed: 'cerrada'
+  }
 }
 
 export default { ...paths, ...formNames }

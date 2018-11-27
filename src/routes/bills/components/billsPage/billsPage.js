@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import classes from './billsPage.scss'
 import { Tabs, Picker } from 'components'
-import { DateFormat } from 'formaters'
 import BillsByWaiter from '../billsByWaiter'
 import BillsByProduct from '../billsByProduct'
 import BillsByDate from '../billsByDate'
@@ -9,7 +8,10 @@ import BillsByDate from '../billsByDate'
 class billsPage extends Component {
   state = { fecha: '' }
   onChangeDate = value => {
-    this.setState({ fecha: DateFormat(value) })
+    const date = new Date(value)
+    const formatedDate =
+      (date.getDate() + 1) + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+    this.setState({ fecha: formatedDate })
   }
   render() {
     return (
