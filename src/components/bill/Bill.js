@@ -15,7 +15,7 @@ class Bill extends Component {
     this.props.onChangeService(id, value)
   }
   render() {
-    const { bill, open, onClose, onSubmit } = this.props
+    const { bill, open, onClose, onSubmit, cashier } = this.props
     if (isEmpty(bill)) return null
     return (
       <Dialog open={open} onClose={onClose} fullWidth={true}>
@@ -25,7 +25,7 @@ class Bill extends Component {
             {bill.productos.map((product, index) => (
               <div key={`product-${index}`} className={classes.product}>
                 <div className={classes.productName}>
-                  {product.nombreProducto}
+                  {product.productoNombre}
                 </div>
                 <div className={classes.productCount}>{product.cantidad}</div>
               </div>
@@ -74,7 +74,7 @@ class Bill extends Component {
           <Button onClick={onClose} color="secondary">
             Cancelar
           </Button>
-          {bill.estado === 'abierta' && (
+          {bill.estado === 'abierta' || cashier === true && (
             <Button onClick={onSubmit} color="primary">
               Cerrar Cuenta
             </Button>
@@ -85,6 +85,7 @@ class Bill extends Component {
   }
 }
 Bill.propTypes = {
+  cashier: PropTypes.bool,
   bill: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
