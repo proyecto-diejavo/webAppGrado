@@ -9,17 +9,21 @@ export default compose(
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
   spinnerWhileLoading(['uid']),
 
-  firestoreConnect(({ fecha }) => [
+  firestoreConnect(() => [
     {
       collection: 'cuenta',
-      where: [['estado', '==', 'cerrada'], ['fecha', '==', fecha]]
+      where: ['estado', '==', 'cerrada']
     }
   ]),
-  connect(({ firestore: { ordered } }) => {
+  connect(({ firestore: { ordered } }, { fecha }) => {
     if (!ordered.cuenta) return null
     const datesAndProducts = []
     const billsByProduct = []
-    ordered.cuenta.map(cuenta =>
+    const cuentas = !fecha
+      ? ordered.cuenta
+      : ordered.cuenta.filter(cuenta => cuenta.fecha === fecha)
+
+    cuentas.map(cuenta =>
       cuenta.productos.map((pr, ind) => {
         if (
           !datesAndProducts.length ||

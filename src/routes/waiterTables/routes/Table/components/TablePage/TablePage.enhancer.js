@@ -15,8 +15,11 @@ export default compose(
   ]),
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
 
-  connect(({ firestore: { data } }, { params }) => ({
-    table: get(data, `mesa.${params.tableId}`)
-  })),
+  connect(({ firestore: { data } }, { params }) => {
+    const tableData = get(data, `mesa.${params.tableId}`)
+    return {
+      table: { ...tableData, tableId: params.tableId }
+    }
+  }),
   spinnerWhileLoading(['table'])
 )

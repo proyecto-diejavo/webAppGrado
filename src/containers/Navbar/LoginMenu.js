@@ -11,11 +11,11 @@ const buttonStyle = {
 
 export const LoginMenu = () => (
   <div>
-    <Button style={buttonStyle} component={Link} to={SIGNUP_PATH}>
+    {/* <Button style={buttonStyle} component={Link} to={SIGNUP_PATH}>
       Sign Up
-    </Button>
+    </Button> */}
     <Button style={buttonStyle} component={Link} to={LOGIN_PATH}>
-      Login
+      Ingresar
     </Button>
   </div>
 )
