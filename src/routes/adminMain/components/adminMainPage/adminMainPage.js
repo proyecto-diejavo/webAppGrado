@@ -8,14 +8,32 @@ export const adminMainPage = ({ adminMain, goToadminBar }) => (
     <Fragment>
       <div className={classes.tablesContainer}>
         <div className={classes.tables}>
-          <Card className={classes.tableCard}>Usuarios</Card>
-          <Card className={classes.tableCard} onclick={() => goToadminBar()}>
+          <Card
+            className={classes.tableCard}
+            onSelect={() => goToadminBar('User')}>
+            Usuarios
+          </Card>
+          <Card
+            className={classes.tableCard}
+            onSelect={() => goToadminBar('Bar')}>
             Bar
           </Card>
-          <Card className={classes.tableCard}>Jornada</Card>
-          <Card className={classes.tableCard}>Inventarios</Card>
-          <Card className={classes.tableCard}>Reportes</Card>
-          <Card className={classes.tableCard}>Clientes</Card>
+          <Card
+            className={classes.tableCard}
+            onSelect={() => goToadminBar('Jornada')}>
+            Jornada
+          </Card>
+          <Card
+            className={classes.tableCard}
+            onSelect={() => goToadminBar('Productos')}>
+            Inventarios
+          </Card>
+          <Card
+            className={classes.tableCard}
+            onSelect={() => goToadminBar('Reportes')}>
+            Reportes
+          </Card>
+          {/*<Card className={classes.tableCard}>Clientes</Card>*/}
         </div>
       </div>
     </Fragment>

@@ -3,3 +3,67 @@
 .container {
   @extend .flex-column-center;
 }
+
+.tblProducts {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tblProducts thead tr{
+  color: white;
+  background-color: #032b35;
+}
+
+.tblProducts tbody tr:nth-child(odd){background-color: #A0A0A0;}
+.tblProducts tbody tr:nth-child(even){background-color:#ddd;}
+
+
+.tblProducts thead tr th, tbody tr td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.CenterText{
+  text-align: center !important;
+}
+
+.divBarra{
+  padding: 15px;
+}
+
+.divZonas{
+  padding: 15px;
+}
+
+.contentAdd{
+  display: flex;
+}
+
+.contentDetails{
+  flex-direction: row;
+  width: 45%;
+}
+
+.ajustFile div {
+  width: 100% !important;
+  color: $white !important;
+}
+
+.divContents {
+  width: 98% !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.Tittle{
+  color: $white;
+  font-size: 20px;
+}
+
+.ContentDiv {
+  background-color: $background;
+  width: 94%;
+  margin-top: 30px;
+}

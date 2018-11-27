@@ -16,6 +16,9 @@
     border-bottom: 1px solid #ddd;
 }
 
+.tblProducts tbody tr:nth-child(odd){background-color: #A0A0A0;}
+.tblProducts tbody tr:nth-child(even){background-color:#ddd;}
+
 .CenterText{
     text-align: center !important;
 }
@@ -26,17 +29,4 @@
 
 .divZonas{
     padding: 15px;
-}
-
-.contentAdd{
-    display: flex;
-}
-
-.contentDetails{
-    flex-direction: row;
-    width: 45%;
-}
-
-.ajustFile div {
-    width: 100% !important;
 }
