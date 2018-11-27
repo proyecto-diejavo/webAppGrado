@@ -1,4 +1,4 @@
-import { ADMIN_INVENTORY_PATH as path } from 'constants'
+import { PRODUCT_INVENTORY_PATH as path } from 'constants'
 
 export default store => ({
   path,
@@ -11,14 +11,14 @@ export default store => ({
       require => {
         /*  Webpack - use require callback to define
           dependencies for bundling   */
-        const adminInventory = require('./components/adminInventory').default
+        const productInventoryPage = require('./components/productInventoryPage').default
 
         /*  Return getComponent   */
-        cb(null, adminInventory)
+        cb(null, productInventoryPage)
 
         /* Webpack named bundle   */
       },
-      'adminInventory'
+      'productInventoryPage'
     )
   }
 })

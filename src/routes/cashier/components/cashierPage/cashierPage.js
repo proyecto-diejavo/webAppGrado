@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Tabs } from 'components'
 import CashierComandas from '../cashierComandas'
 import CashierBill from '../cashierBill'
+import BillsByWaiter from '../../../bills/components/billsByWaiter'
 import classes from './cashierPage.scss'
 
 export const cashierPage = ({ cashier }) => (
@@ -16,6 +17,10 @@ export const cashierPage = ({ cashier }) => (
         {
           name: 'Cuentas',
           content: <CashierBill />
+        },
+        {
+          name: 'Reporte Ventas Empleado',
+          content: <BillsByWaiter/>
         }
       ]}
     />
