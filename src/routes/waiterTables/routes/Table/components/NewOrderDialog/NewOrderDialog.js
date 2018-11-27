@@ -112,7 +112,7 @@ class NewOrderDialog extends Component {
   }
   renderOrigin = () => {
     const { barras } = this.props
-    if (!this.state.destino || this.state.destino !== 'barra') return null
+    if (!this.state.destino || this.state.destino !== 'Barra') return null
     return (
       <div className={classes.select}>
         <Typography className={classes.title} component="p">

@@ -8,10 +8,10 @@ import { UserIsAuthenticated } from 'utils/router'
 export default compose(
   UserIsAuthenticated,
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
-  firestoreConnect(({ params, uid }) => [
+  firestoreConnect(({ params, uid, table }) => [
     {
       collection: 'cuenta',
-      where: ['idMesero', '==', uid]
+      where: [['idMesero', '==', uid], ['idMesa', '==', table.tableId]]
     }
   ]),
   connect(({ firestore: { ordered } }) => ({

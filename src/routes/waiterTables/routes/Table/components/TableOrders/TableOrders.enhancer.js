@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { withHandlers, withStateHandlers, pure } from 'recompose'
 import { UserIsAuthenticated } from 'utils/router'
+import { DateFormat } from 'formaters'
+
+const today = new Date()
+const fecha = DateFormat(today)
 
 export default compose(
   UserIsAuthenticated,
@@ -10,7 +14,7 @@ export default compose(
   firestoreConnect(({ params, uid, table }) => [
     {
       collection: 'comanda',
-      where: [['idMesero', '==', uid], ['idMesa', '==', table]]
+      where: [['idMesero', '==', uid], ['idMesa', '==', table.tableId]]
     }
   ]),
   connect(({ firestore: { ordered } }) => ({
@@ -46,9 +50,11 @@ export default compose(
           {
             ...newInstance,
             idMesero: uid,
-            idMesa: table,
+            idMesa: table.tableId,
+            numeroMesa: table.numero,
             estado: 'generada',
-            fecha: firestore.FieldValue.serverTimestamp()
+            fecha: fecha,
+            hora: today.getHours() + ':' + today.getMinutes()
           }
         )
         .then(() => {

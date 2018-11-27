@@ -6,13 +6,13 @@ import { UserIsAuthenticated } from 'utils/router'
 import { DateFormat } from 'formaters'
 import { compose } from 'redux'
 
-const today = new Date()
+const today = DateFormat(new Date())
 export default compose(
   UserIsAuthenticated,
   firestoreConnect(({ params }) => [
     {
       collection: 'jornada',
-      where: ['fecha', '==', DateFormat(today)]
+      where: ['fecha', '==', today]
     }
   ]),
   connect(({ firestore: { ordered } }) => {
