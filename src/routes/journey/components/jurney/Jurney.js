@@ -29,17 +29,13 @@ export const Jurney = ({
               </tr>
             </thead>
             <tbody>
-              {!isEmpty(data) &&
-                data.map(
-                  (jurneys, ind) =>
-                    !isEmpty(jurneys.barras) &&
-                    jurneys.barras.map((barra, ind) => (
-                      <tr>
-                        <td>{barra.bartender}</td>
-                        <td>{barra.numeroBarra}</td>
-                      </tr>
-                    ))
-                )}
+              {!isEmpty(data.barras) &&
+                data.barras.map((barra, ind) => (
+                  <tr>
+                    <td>{barra.bartender}</td>
+                    <td>{barra.numeroBarra}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
@@ -53,17 +49,13 @@ export const Jurney = ({
               </tr>
             </thead>
             <tbody>
-              {!isEmpty(data) &&
-                data.map(
-                  (jurneys, ind) =>
-                    !isEmpty(jurneys.zona) &&
-                    jurneys.zona.map((barra, ind) => (
-                      <tr>
-                        <td>{barra.mesero}</td>
-                        <td>{barra.numeroZona}</td>
-                      </tr>
-                    ))
-                )}
+              {!isEmpty(data.zona) &&
+                data.zona.map((zonas, ind) => (
+                  <tr>
+                    <td>{zonas.mesero}</td>
+                    <td>{zonas.numeroZona}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

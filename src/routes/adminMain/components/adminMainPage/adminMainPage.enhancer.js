@@ -5,7 +5,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { withNotifications } from 'modules/notification'
 import { withRouter, spinnerWhileLoading } from 'utils/components'
 import { UserIsAuthenticated } from 'utils/router'
-import { USERS_PATH, JOURNEY_PATH, ADMIN_BAR_PATH } from 'constants'
+import { USERS_PATH, JOURNEY_PATH, ADMIN_BAR_PATH, BILLS_PATH } from 'constants'
 
 export default compose(
   UserIsAuthenticated,
@@ -36,6 +36,8 @@ export default compose(
         router.push(JOURNEY_PATH)
       } else if (routes === 'User') {
         router.push(USERS_PATH)
+      } else if (routes === 'Reportes') {
+        router.push(BILLS_PATH)
       }
     }
   }),

@@ -31,8 +31,8 @@ export default compose(
   connect(({ firestore: { ordered } }) => {
     if (!ordered.users) return null
     return {
-      mesero: ordered.users.filter(users => users.cargo === 'Mesero'),
-      bartender: ordered.users.filter(users => users.cargo === 'Bartender')
+      mesero: ordered.users.filter(users => users.cargo === 'mesero'),
+      bartender: ordered.users.filter(users => users.cargo === 'bartender')
     }
   }),
   withRouter,

@@ -24,7 +24,11 @@ export const adminMainPage = ({ adminMain, goToadminBar }) => (
             Jornada
           </Card>
           <Card className={classes.tableCard}>Inventarios</Card>
-          <Card className={classes.tableCard}>Reportes</Card>
+          <Card
+            className={classes.tableCard}
+            onSelect={() => goToadminBar('Reportes')}>
+            Reportes
+          </Card>
           <Card className={classes.tableCard}>Clientes</Card>
         </div>
       </div>
