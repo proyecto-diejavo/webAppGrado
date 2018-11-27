@@ -14,6 +14,7 @@ import journeyRoute from './journey'
 import cashierRoute from './cashier'
 import BillsRoute from './bills'
 import productInventoryRoute from './productInventory'
+import MainRoute from './main'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -36,6 +37,7 @@ export const createRoutes = store => ({
     cashierRoute(store),
     BillsRoute(store),
     productInventoryRoute(store),
+    MainRoute(store),
     // AsyncRoute(store) // async routes setup by passing store
     // SyncRoute, // sync routes just need route object by itself
     /* Place all Routes above here so NotFoundRoute can act as a 404 page */

@@ -23,7 +23,7 @@ export const BartenderMainDetails = ({
             title={`Mesa ${order.numeroMesa}`}
             onClick={() =>
               putComanda(
-                order.id,
+                order,
                 resolveState,
                 order.productos,
                 order.idBarra,

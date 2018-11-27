@@ -8,10 +8,10 @@ import { UserIsAuthenticated } from 'utils/router'
 export default compose(
   UserIsAuthenticated,
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
-  firestoreConnect(({ params, uid }) => [
+  firestoreConnect(({ params, uid, table }) => [
     {
       collection: 'cuenta',
-      where: ['idMesero', '==', uid]
+      where: [['idMesero', '==', uid], ['idMesa', '==', table.tableId]]
     }
   ]),
   connect(({ firestore: { ordered } }) => ({
@@ -47,8 +47,8 @@ export default compose(
       }
       const currentBill = bills.filter(bill => bill.id === id).shift()
       const subTotal = parseFloat(currentBill.subTotal)
-      const iva = parseFloat(currentBill.iva)
-      const newTotal = subTotal + iva + parseFloat(serviceValue)
+      const impuesto = parseFloat(currentBill.impuesto)
+      const newTotal = subTotal + impuesto + parseFloat(serviceValue)
       return firestore
         .update(
           { collection: 'cuenta', doc: id },

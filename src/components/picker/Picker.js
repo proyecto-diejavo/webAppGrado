@@ -14,7 +14,6 @@ function Picker(props) {
         <TextField
           id="date"
           type="date"
-          defaultValue="2018-11-27"
           className={classes.textField}
           inputProps={{
             onChange: evt => props.onChange(evt.target.value)

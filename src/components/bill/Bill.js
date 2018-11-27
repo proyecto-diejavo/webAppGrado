@@ -39,8 +39,8 @@ class Bill extends Component {
               </div>
             </div>
             <div className={classes.product}>
-              {'IVA'}
-              <div className={classes.productCount}>{MoneyFormat(bill.iva)}</div>
+              {'Impoconsumo'}
+              <div className={classes.productCount}>{MoneyFormat(bill.impuesto)}</div>
             </div>
             <div className={classes.product}>
               {'Servicio'}

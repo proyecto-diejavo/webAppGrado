@@ -3,20 +3,39 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { withHandlers, withStateHandlers, pure } from 'recompose'
 import { UserIsAuthenticated } from 'utils/router'
+import { DateFormat } from 'formaters'
+import { get } from 'lodash'
+
+const today = new Date()
+const fecha = DateFormat(today)
 
 export default compose(
   UserIsAuthenticated,
   connect(({ firebase: { auth: { uid } } }) => ({ uid })),
+  firestoreConnect(({ uid }) => [
+    {
+      collection: 'users',
+      doc: uid
+    }
+  ]),
+  connect(({ firestore: { data } }, { uid }) => {
+    if (!data.users) return null
+    const user = get(data, `users.${uid}`)
+    if (!user) return null
+    return {
+      username: user.username
+    }
+  }),
+  connect(({ firebase: { auth: { uid } } }) => ({ uid })),
   firestoreConnect(({ params, uid, table }) => [
     {
       collection: 'comanda',
-      where: [['idMesero', '==', uid], ['idMesa', '==', table]]
+      where: [['idMesero', '==', uid], ['idMesa', '==', table.tableId]]
     }
   ]),
   connect(({ firestore: { ordered } }) => ({
     orders: ordered.comanda
   })),
-  // spinnerWhileLoading(['orders']),
   withStateHandlers(
     ({ initialDialogOpen = false }) => ({
       newDialogOpen: initialDialogOpen
@@ -33,6 +52,7 @@ export default compose(
         firestore,
         uid,
         table,
+        username,
         showError,
         showSuccess,
         toggleDialog
@@ -46,9 +66,12 @@ export default compose(
           {
             ...newInstance,
             idMesero: uid,
-            idMesa: table,
+            mesero: username,
+            idMesa: table.tableId,
+            numeroMesa: table.numero,
             estado: 'generada',
-            fecha: firestore.FieldValue.serverTimestamp()
+            fecha: fecha,
+            hora: today.getHours() + ':' + today.getMinutes()
           }
         )
         .then(() => {

@@ -6,20 +6,20 @@ import TableBills from '../TableBills'
 import Typography from '@material-ui/core/Typography'
 import classes from './TablePage.scss'
 
-export const TablePage = ({ params, table }) => (
+export const TablePage = ({ table }) => (
   <div className={classes.container}>
-    <Typography className={classes.title} component="h2">
-      {table.numero || 'Mesa'}
-    </Typography>
+    {/* <Typography className={classes.title} component="h2">
+      {`Mesa ${table.numero}`}
+    </Typography> */}
     <Tabs
       tabsArray={[
         {
           name: 'Comandas',
-          content: <TableOrders table={params.tableId} />
+          content: <TableOrders table={table} />
         },
         {
           name: 'Cuentas',
-          content: <TableBills table={params.tableId} />
+          content: <TableBills table={table} />
         }
       ]}
     />
@@ -27,8 +27,7 @@ export const TablePage = ({ params, table }) => (
 )
 
 TablePage.propTypes = {
-  table: PropTypes.object,
-  params: PropTypes.object.isRequired
+  table: PropTypes.object
 }
 
 export default TablePage

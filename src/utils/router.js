@@ -1,6 +1,6 @@
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { browserHistory } from 'react-router'
-import { WAITER_TABLES_PATH } from 'constants'
+import { MAIN_PATH, rolPaths  } from 'constants'
 import LoadingSpinner from 'components/LoadingSpinner'
 
 const AUTHED_REDIRECT = 'AUTHED_REDIRECT'
@@ -42,7 +42,7 @@ export const UserIsNotAuthenticated = UserAuthWrapper({
   LoadingComponent: LoadingSpinner,
   failureRedirectPath: (state, props) =>
     // redirect to page user was on or to list path
-    props.location.query.redirect || WAITER_TABLES_PATH,
+    props.location.query.redirect || MAIN_PATH,
   authSelector: ({ firebase: { auth } }) => auth,
   authenticatingSelector: ({ firebase: { auth, isInitializing } }) =>
     !auth.isLoaded || isInitializing,
@@ -52,6 +52,8 @@ export const UserIsNotAuthenticated = UserAuthWrapper({
     dispatch({ type: AUTHED_REDIRECT })
   }
 })
+
+export const RouteByRol = rol => rolPaths[rol]
 
 export default {
   UserIsAuthenticated,
