@@ -29,7 +29,7 @@ export const adminMainPage = ({ adminMain, goToadminBar }) => (
             onSelect={() => goToadminBar('Reportes')}>
             Reportes
           </Card>
-          <Card className={classes.tableCard}>Clientes</Card>
+          {/*<Card className={classes.tableCard}>Clientes</Card>*/}
         </div>
       </div>
     </Fragment>
