@@ -5,12 +5,15 @@ import { isEmpty } from 'react-redux-firebase'
 import NewOrderDialog from '../NewOrderDialog'
 import classes from './TableOrders.scss'
 
+const resolveState = 'por cancelar'
+
 export const TableOrders = ({
   orders,
   onClick,
   addOrder,
   newDialogOpen,
-  toggleDialog
+  toggleDialog,
+  putComanda
 }) => (
   <div className={classes.container}>
     {!isEmpty(orders) &&
@@ -22,6 +25,8 @@ export const TableOrders = ({
             key={`orderCard-${index}`}
             order={order}
             title={`${title} ${titleNumber}`}
+            textModal={'¿Desea cancelar la comanda?'}
+            onClick={() => putComanda(order, resolveState)}
           />
         )
       })}
@@ -37,6 +42,7 @@ export const TableOrders = ({
 )
 
 TableOrders.propTypes = {
+  putComanda: PropTypes.func,
   orders: PropTypes.object,
   onClick: PropTypes.func,
   addOrder: PropTypes.func.isRequired,

@@ -27,7 +27,7 @@ class BillCard extends Component {
     this.handleChange()
   }
   render() {
-    const { bill, onChangeService } = this.props
+    const { bill, onChangeService, cashier } = this.props
     const closed = bill.estado === 'cerrada'
     return (
       !isEmpty(bill.productos) && (
@@ -39,6 +39,7 @@ class BillCard extends Component {
             </Card>
           </div>
           <Bill
+            cashier={cashier}
             bill={bill}
             open={this.state.showBillModal}
             onClose={this.handleChange}
@@ -52,6 +53,7 @@ class BillCard extends Component {
 }
 
 BillCard.propTypes = {
+  cashier: PropTypes.bool,
   bill: PropTypes.object.isRequired,
   onChangeService: PropTypes.func,
   closeBill: PropTypes.func

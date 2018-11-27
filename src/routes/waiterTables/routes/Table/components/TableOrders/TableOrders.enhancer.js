@@ -83,6 +83,26 @@ export default compose(
           showError(err.message || 'La comanda no se ha podido registrar')
           return Promise.reject(err)
         })
+    },
+    putComanda: props => (order, estado) => {
+      const { firestore, uid, showError, showSuccess } = props
+      if (!uid) {
+        return showError('Error cambiando el estado')
+      }
+      return firestore
+        .update(
+          { collection: 'comanda', doc: order.id },
+          {
+            estado: estado
+          }
+        )
+        .then(() => {
+          showSuccess('Comanda actualizada correctamente')
+        })
+        .catch(err => {
+          showError(err.message || 'No se acctualizo el estado')
+          return Promise.reject(err)
+        })
     }
   }),
   pure

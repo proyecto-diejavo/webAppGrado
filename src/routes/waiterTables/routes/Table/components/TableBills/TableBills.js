@@ -4,7 +4,7 @@ import { BillCard } from 'components'
 import { isEmpty } from 'react-redux-firebase'
 import classes from './TableBills.scss'
 
-const resolveState = 'Por Cerrar'
+const resolveState = 'por cerrar'
 
 export const TableBills = ({ bills, changeServiceValue, closeBill }) => (
   <div className={classes.container}>
