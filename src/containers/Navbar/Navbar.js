@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import AccountMenu from './AccountMenu'
 import LoginMenu from './LoginMenu'
 import { LIST_PATH } from 'constants'
+import { logoWhite } from 'images'
 
 export const Navbar = ({
   avatarUrl,
@@ -20,23 +21,24 @@ export const Navbar = ({
   classes
 }) => (
   <AppBar position="static">
-    <Toolbar>
-      <Typography
+    <Toolbar className={classes.container}>
+      {/* <Typography
         variant="title"
         color="inherit"
         className={classes.flex}
         component={Link}
         to={authExists ? LIST_PATH : '/'}>
         Home
-      </Typography>
-      <Typography
+      </Typography> */}
+      <img alt="" src={logoWhite} className={classes.logo} />
+      {/* <Typography
         variant="title"
         color="inherit"
         className={classes.flex}
         component={Link}
         to={authExists ? LIST_PATH : '/'}>
         Mesa 3  -  $450.000
-      </Typography>
+      </Typography> */}
       {authExists ? (
         <AccountMenu
           avatarUrl={avatarUrl}

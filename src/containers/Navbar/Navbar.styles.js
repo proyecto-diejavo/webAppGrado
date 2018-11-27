@@ -1,5 +1,8 @@
 export default theme => ({
-  flex: {
-    flexGrow: 1
+  container: {
+    justifyContent: 'space-between'
+  },
+  logo: {
+    width: 40
   }
 })

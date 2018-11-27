@@ -101,6 +101,9 @@ class NewOrderDialog extends Component {
   }
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
+  }
+  handleChangeBar = event => {
+    this.handleChange(event)
     this.onSelectChange(
       'bartender',
       event.target.value,
@@ -140,11 +143,11 @@ class NewOrderDialog extends Component {
           className={classes.bar}
           label="Barra"
           value={this.state.barra}
-          onChange={this.handleChange}
+          onChange={this.handleChangeBar}
           validate={[required]}>
           {barras &&
             barras.map(barra => (
-              <MenuItem value={barra.id}>{barra.numero}</MenuItem>
+              <MenuItem value={barra.idBarra}>{barra.numeroBarra}</MenuItem>
             ))}
         </Field>
       </div>
