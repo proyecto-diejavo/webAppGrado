@@ -34,7 +34,7 @@ export const paths = {
 export const rolPaths = {
   bartender: BARTENDER_MAIN_PATH,
   mesero: WAITER_TABLES_PATH,
-  administrador: ADMIN_BAR_PATH,
+  administrador: ADMIN_MAIN_PATH,
   cajero: CASHIER_PATH,
   cocina: BARTENDER_MAIN_PATH
 }
