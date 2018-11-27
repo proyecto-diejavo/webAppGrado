@@ -13,9 +13,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import classes from './adminBarPage.scss'
 
 class adminBarPage extends Component {
-  onSelectChange = (field, val) => {
-    this.props.change(field, val.trim())
-  }
 
   renderBar = ({ fields, meta: { error, submitFailed } }) => {
     const { zonas, mesa } = this.props
@@ -37,82 +34,7 @@ class adminBarPage extends Component {
             }
           ]}
         />
-        <div className={classes.ContentDiv}>
-          <div>
-            <DialogTitle id="simple-dialog-title" className={classes.Tittle}>Meseros - Zonas</DialogTitle>
-            <div>
-              <Field
-                component={TextField}
-                name={'numeroZona'}
-                type="hidden"
-                style={{ height: 0 }}
-              />
-              <div className={classes.ajustFile}>
-                <Field
-                  name={'idZona'}
-                  component={SelectField}
-                  className={classes.ajustFile}
-                  onChange={evt =>
-                    this.onSelectChange('numeroZona', evt.currentTarget.outerText)
-                  }>
-                  {zonas &&
-                    zonas.map(zona => (
-                      <MenuItem value={zona.id}>{zona.numero}</MenuItem>
-                    ))}
-                </Field>
-              </div>
-            </div>
-          </div>
-          <div className={classes.divContents}>
-            <table className={classes.tblProducts}>
-              <thead>
-                <tr>
-                  <td className={classes.CenterText}>Mesa</td>
-                  <td className={classes.CenterText}>Eliminar</td>
-                </tr>
-              </thead>
-              <tbody>
-                {fields.map((field, index) => (
-                  <tr>
-                    <td>
-                      <Field
-                        component={TextField}
-                        name={`${field}.mesa`}
-                        type="hidden"
-                        style={{ height: 0 }}
-                      />
-                      <div className={classes.ajustFile}>
-                        <Field
-                          name={`${field}.idmesa`}
-                          component={SelectField}
-                          onChange={evt =>
-                            this.onSelectChange(
-                              `${field}.mesa`,
-                              evt.currentTarget.outerText
-                            )
-                          }>
-                          {mesa &&
-                            mesa.map(mesas => (
-                              <MenuItem value={mesas.id}>{mesas.numero}</MenuItem>
-                            ))}
-                        </Field>
-                      </div>
-                    </td>
-                    <td>
-                      <Button
-                        onClick={() => fields.remove(index)}
-                        color="primary">
-                        x
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <AddNewButton onClick={() => fields.push({})} />
-          </div>
-        </div>
-      </div>
+      </div>       
     )
   }
 
