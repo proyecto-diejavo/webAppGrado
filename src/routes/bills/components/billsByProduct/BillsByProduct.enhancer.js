@@ -37,10 +37,10 @@ export default compose(
             idProducto: pr.idProducto
           })
           billsByProduct.push({
-            productoNombre: pr.nombreProducto,
+            productoNombre: pr.productoNombre,
             idProducto: pr.idProducto,
             fecha: cuenta.fecha,
-            totalVendido: pr.valorTotal,
+            totalVendido: pr.valorUnitario,
             cantidadTotal: pr.cantidad
           })
         } else {
@@ -49,11 +49,11 @@ export default compose(
             .indexOf(cuenta.fecha)
           const savedBill = billsByProduct[index]
           billsByProduct[index] = {
-            productoNombre: pr.nombreProducto,
+            productoNombre: pr.productoNombre,
             idProducto: pr.idProducto,
             fecha: cuenta.fecha,
             totalVendido:
-              parseFloat(savedBill.totalVendido) + parseFloat(pr.valorTotal),
+              parseFloat(savedBill.totalVendido) + parseFloat(pr.valorUnitario),
             cantidadTotal:
               parseFloat(savedBill.cantidadTotal) + parseFloat(pr.cantidad)
           }
