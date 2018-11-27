@@ -15,6 +15,7 @@ export const ADMIN_BAR_PATH = '/adminBar'
 export const JOURNEY_PATH = '/journey'
 export const CASHIER_PATH = '/cashier'
 export const BILLS_PATH = '/bills'
+export const PRODUCT_INVENTORY_PATH = '/productInventory'
 export const MAIN_PATH = '/main'
 
 export const formNames = {
