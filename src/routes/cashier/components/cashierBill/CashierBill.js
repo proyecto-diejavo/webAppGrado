@@ -4,17 +4,25 @@ import { BillCard } from 'components'
 import { isEmpty } from 'react-redux-firebase'
 import classes from './CashierBill.scss'
 
-export const CashierBill = ({ bills }) => (
+const resolveState = 'cerrada'
+
+export const CashierBill = ({ bills, closeBill }) => (
   <div className={classes.container}>
     {!isEmpty(bills) &&
       bills.map((bill, index) => (
-        <BillCard key={`billCard-${index}`} bill={bill} />
+        <BillCard
+          key={`billCard-${index}`}
+          bill={bill}
+          cashier={true}
+          closeBill={() => closeBill(bill.id, resolveState)}
+        />
       ))}
   </div>
 )
 
 CashierBill.propTypes = {
-  bills: PropTypes.object
+  bills: PropTypes.object,
+  closeBill: PropTypes.func
 }
 
 export default CashierBill

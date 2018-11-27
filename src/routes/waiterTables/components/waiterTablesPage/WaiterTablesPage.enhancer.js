@@ -22,10 +22,29 @@ export default compose(
       (a, b) => a.numeroZona - b.numeroZona
     )
     return {
-      zones: zonaMesas
+      zonesNot: zonaMesas
     }
   }),
-  spinnerWhileLoading(['zones']),
+
+  firestoreConnect(({ params, uid, table }) => [
+    {
+      collection: 'comanda',
+      where: ['estado', '==', 'despachada']
+    }
+  ]),
+  connect(({ firestore: { ordered } }) => {
+    if (!ordered.comanda || !ordered.zona_mesas) return null
+    const comandas = ordered.comanda
+    const zones = ordered.zona_mesas.map(zone => ({
+      ...zone,
+      mesas: zone.mesas.map(mesa => ({
+        ...mesa,
+        notificaciones: comandas.filter(com => com.idMesa === mesa.id).length
+      }))
+    }))
+    return { zones }
+  }),
+  // spinnerWhileLoading(['zones']),
   withRouter,
   withNotifications,
   withHandlers({

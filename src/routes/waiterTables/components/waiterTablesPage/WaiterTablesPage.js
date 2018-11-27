@@ -14,6 +14,7 @@ const zoneTables = (zone, goToTable) => {
         <div className={classes.tables}>
           {mesas.map(mesa => (
             <Card
+              notifications={mesa.notificaciones}
               className={classes.tableCard}
               onSelect={() => goToTable(mesa.id)}>
               {mesa.numero}
